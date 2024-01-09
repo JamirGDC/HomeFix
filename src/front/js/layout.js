@@ -13,6 +13,8 @@ import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { Sign } from "./component/sign";
 import { Login } from "./component/login";
+import { Questions } from "./component/questions";
+import { Manifest } from "./component/manifest";
 
 //create your first component
 const Layout = () => {
