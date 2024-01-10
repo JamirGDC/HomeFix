@@ -9,7 +9,8 @@
 	"scripts": {
 		"start": "npm run build:css && webpack-dev-server --config webpack.dev.js --port 3000",
 		"build": "npm run build:css && webpack --config webpack.prod.js",
-		"build:css": "postcss src/index.css -o src/index.css"
+		"build:css": "postcss src/front/styles/index.css -o src/front/styles/index.css --use autoprefixer"
+
 	},
 	"author": {
 		"name": "Alejandro Sanchez",
@@ -34,6 +35,7 @@
 		"@babel/preset-env": "^7.16.4",
 		"@babel/preset-react": "^7.16.0",
 		"@babel/runtime": "^7.16.3",
+		"autoprefixer": "^10.4.16",
 		"babel-eslint": "^10.1.0",
 		"babel-loader": "^8.2.3",
 		"babel-plugin-transform-class-properties": "^6.24.1",
@@ -50,6 +52,8 @@
 		"html-loader": "^3.0.1",
 		"html-webpack-plugin": "^5.5.0",
 		"parse-github-url": "^1.0.2",
+		"postcss": "^8.4.33",
+		"postcss-cli": "^11.0.0",
 		"prettier": "^2.5.1",
 		"remote-origin-url": "^2.0.0",
 		"style-loader": "^3.3.1",
@@ -74,8 +78,6 @@
 		]
 	},
 	"dependencies": {
-		"autoprefixer": "^10.4.16",
-		"postcss": "^8.4.33",
 		"prop-types": "^15.6.1",
 		"react": "^16.8.4",
 		"react-dom": "^16.8.4",
