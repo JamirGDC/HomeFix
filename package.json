@@ -73,6 +73,9 @@
 		]
 	},
 	"dependencies": {
+		"@headlessui/react": "^1.7.18",
+		"@heroicons/react": "^2.1.1",
+		"@material-tailwind/react": "^2.1.8",
 		"prop-types": "^15.6.1",
 		"react": "^16.8.4",
 		"react-dom": "^16.8.4",
