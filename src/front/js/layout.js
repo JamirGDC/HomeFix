@@ -35,7 +35,7 @@ const Layout = () => {
                         <Route element={<About />} path="/about" />
                         <Route element={<Questions />} path="/questions" />
                         <Route element={<Manifest />} path="/manifest" />
-                        <Route element={<Sidebar />} path="/sidebar" /> /* He dejado el Sidebar aquí y renderiza todo excepto esto, cuando regrese revisaé la implementación por que no detecto el error*/ 
+                        <Route element={<Sidebar />} path="/sidebar" /> /* He dejado ell Sidebar aquí y renderiza todo excepto esto, cuando regrese revisaé la implementación por que no detecto el error*/ 
 
                         <Route element={<h1>Not found!</h1>} />
                         
