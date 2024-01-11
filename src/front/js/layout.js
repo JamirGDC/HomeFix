@@ -12,6 +12,7 @@ import Login from "./component/login";
 import About from "./component/about";
 import Questions from "./component/questions";
 import Manifest from "./component/manifest";
+import Sidebar from "./component/sidebar";
 
 //create your first component
 const Layout = () => {
@@ -28,6 +29,7 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
 
+                        <Route element={<Sidebar />} path="/sidebar" />
                         <Route element={<Sign />} path="/sign" />
                         <Route element={<Login />} path="/login" />
                         <Route element={<About />} path="/about" />
