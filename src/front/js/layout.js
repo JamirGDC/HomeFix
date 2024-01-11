@@ -29,12 +29,6 @@ const Layout = () => {
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
                     <Navbar />
-                    <h1 className="text-3xl font-bold underline text-red-500">
-                        Hello world!
-                    </h1>
-                    <ThemeProvider value={customTheme}>
-                        <Button>Button</Button>
-                    </ThemeProvider>
                     <Routes>
 
                         <Route element={<Sign />} path="/sign" />
@@ -42,10 +36,10 @@ const Layout = () => {
                         <Route element={<About />} path="/about" />
                         <Route element={<Questions />} path="/questions" />
                         <Route element={<Manifest />} path="/manifest" />
-                        <Route element={<Sidebar />} path="/sidebar" /> /* He dejado ell Sidebar aquí y renderiza todo excepto esto, cuando regrese revisaé la implementación por que no detecto el error*/ 
+                        <Route element={<Sidebar />} path="/sidebar" /> /* He dejado ell Sidebar aquí y renderiza todo excepto esto, cuando regrese revisaé la implementación por que no detecto el error*/
 
                         <Route element={<h1>Not found!</h1>} />
-                        
+
                     </Routes>
                     <Footer />
                 </ScrollToTop>
