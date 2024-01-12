@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
-import injectContext from "./store/appContext";
+import injectContext, { Context } from "./store/appContext";
 
 import Navbar from "./component/navbar";
 import Footer from "./component/footer";
@@ -13,14 +13,28 @@ import About from "./component/about";
 import Questions from "./component/questions";
 import Manifest from "./component/manifest";
 import Sidebar from "./component/sidebar";
-import { Button, ThemeProvider } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
+
+const Home = () => {
+    return (<>
+        <h1>Estas logueado pibe!!!!</h1>
+    </>)
+}
+
+const RedirectToLogin = () => {
+    const navigate = useNavigate();
+    useEffect(() => {
+        navigate("/login")
+    }, [])
+}
+
 
 //create your first component
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
     // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
     const basename = process.env.BASENAME || "";
-    const customTheme = { };
+    const { store } = useContext(Context)
 
     if(!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL/ >;
 
@@ -30,6 +44,8 @@ const Layout = () => {
                 <ScrollToTop>
                     <Navbar />
                     <Routes>
+                        { store.token ? <Route element={<Home />} path="/home" /> : <Route element={<RedirectToLogin />} path="/home" /> }
+                        
 
                         <Route element={<Sign />} path="/sign" />
                         <Route element={<Login />} path="/login" />
