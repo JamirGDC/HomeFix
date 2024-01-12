@@ -28,32 +28,45 @@ const RedirectToLogin = () => {
     }, [])
 }
 
+const RedirectToHome = () => {
+    const navigate = useNavigate();
+    useEffect(() => {
+        navigate("/home")
+    }, [])
+}
+
 
 //create your first component
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
     // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
     const basename = process.env.BASENAME || "";
-    const { store } = useContext(Context)
+    const { store, actions } = useContext(Context)
 
     if(!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL/ >;
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if(token) {
+            actions.updateToken(token);
+        }
+    }, [])
+
 
     return (
         <div>
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
-                    <Navbar />
+                    { store.token ? <Navbar /> : '' }
                     <Routes>
-                        { store.token ? <Route element={<Home />} path="/home" /> : <Route element={<RedirectToLogin />} path="/home" /> }
-                        
+                        { store.token ? <Route element={<Home />} path="/home" />: <Route element={<RedirectToLogin />} path="/home" /> }
 
                         <Route element={<Sign />} path="/sign" />
-                        <Route element={<Login />} path="/login" />
                         <Route element={<About />} path="/about" />
                         <Route element={<Questions />} path="/questions" />
                         <Route element={<Manifest />} path="/manifest" />
-                        <Route element={<Sidebar />} path="/sidebar" /> /* He dejado ell Sidebar aquí y renderiza todo excepto esto, cuando regrese revisaé la implementación por que no detecto el error*/
-
+                        <Route element={<Sidebar />} path="/sidebar" />
+                        { !store.token ? <Route element={<Login />} path="/login" /> : <Route element={<RedirectToHome />} path="/login" /> }
                         <Route element={<h1>Not found!</h1>} />
 
                     </Routes>

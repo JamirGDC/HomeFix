@@ -59,10 +59,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 				const data = await response.json();
 				setStore({ ...store, token: data.token });
+				localStorage.setItem('token', data.token)
+			},
+			updateToken: (token) => {
+				const store = getStore();
+				setStore({ ...store, token: token });
 			},
 			clearToken: () => {
 				const store = getStore();
 				setStore({ ...store, token: '' });
+				localStorage.setItem('token', '');
 			}
 		}
 	};
