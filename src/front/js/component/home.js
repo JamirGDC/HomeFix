@@ -1,3 +1,5 @@
+import React, { Component } from "react";
+import "../styles/home.css";
 import {
     Card,
     CardHeader,
@@ -8,6 +10,7 @@ import {
     Tooltip,
     IconButton,
   } from "@material-tailwind/react";
+import { homedir } from "os";
    
   export function BookingCard() {
     return (
@@ -158,3 +161,5 @@ import {
       </Card>
     );
   }
+
+  export default Home
