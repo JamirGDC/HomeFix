@@ -1,17 +1,19 @@
-//import react into the bundle
+// Importa las dependencias necesarias
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client'; // Cambia la importación aquí
+import { ThemeProvider } from "@material-tailwind/react";
 
-//include your index.scss file into the bundle
+// Importa tus componentes
+import Layout from "./layout";
 import "../styles/index.css";
 import "./index.css";
 
-//import your own components
-import Layout from "./layout";
-import { ThemeProvider } from "@material-tailwind/react";
-//render your react application
-ReactDOM.render(
-    <ThemeProvider>
-        <Layout />
-    </ThemeProvider>
-    , document.querySelector("#app"));
+// Utiliza createRoot para renderizar tu aplicación
+const root = createRoot(document.querySelector("#app"));
+
+// Llama a root.render y pasa tus componentes envueltos en ThemeProvider
+root.render(
+  <ThemeProvider>
+    <Layout />
+  </ThemeProvider>
+);
