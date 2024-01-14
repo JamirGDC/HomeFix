@@ -12,12 +12,15 @@ import Login from "./component/login";
 import About from "./component/about";
 import Questions from "./component/questions";
 import Manifest from "./component/manifest";
+import Sidebar from "./component/sidebar";
+import { Button, ThemeProvider } from "@material-tailwind/react";
 
 //create your first component
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
     // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
     const basename = process.env.BASENAME || "";
+    const customTheme = { };
 
     if(!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL/ >;
 
@@ -33,9 +36,10 @@ const Layout = () => {
                         <Route element={<About />} path="/about" />
                         <Route element={<Questions />} path="/questions" />
                         <Route element={<Manifest />} path="/manifest" />
+                        <Route element={<Sidebar />} path="/sidebar" /> /* He dejado ell Sidebar aquí y renderiza todo excepto esto, cuando regrese revisaé la implementación por que no detecto el error*/
 
                         <Route element={<h1>Not found!</h1>} />
-                        
+
                     </Routes>
                     <Footer />
                 </ScrollToTop>
