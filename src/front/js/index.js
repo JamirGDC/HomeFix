@@ -11,9 +11,11 @@ import "./index.css";
 // Utiliza createRoot para renderizar tu aplicación
 const root = createRoot(document.querySelector("#app"));
 
+
 // Llama a root.render y pasa tus componentes envueltos en ThemeProvider
 root.render(
   <ThemeProvider>
     <Layout />
   </ThemeProvider>
 );
+
