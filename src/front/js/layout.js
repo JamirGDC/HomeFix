@@ -2,16 +2,17 @@ import React, { useContext, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
+import "./styles/layout.css";
 
 import injectContext, { Context } from "./store/appContext";
 
-import Navbar from "./component/navbar";
 import Footer from "./component/footer";
 import Sign from "./component/sign";
 import Login from "./component/login";
 import About from "./component/about";
 import Questions from "./component/questions";
 import Manifest from "./component/manifest";
+import Navbar1 from "./component/navbar1";
 import Sidebar from "./component/sidebar";
 import { useNavigate } from "react-router-dom";
 
@@ -54,26 +55,22 @@ const Layout = () => {
 
 
     return (
-        <div>
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
                     { store.token ? <Navbar /> : '' }
                     <Routes>
-                        { store.token ? <Route element={<Home />} path="/home" />: <Route element={<RedirectToLogin />} path="/home" /> }
 
                         <Route element={<Sign />} path="/sign" />
                         <Route element={<About />} path="/about" />
                         <Route element={<Questions />} path="/questions" />
                         <Route element={<Manifest />} path="/manifest" />
-                        <Route element={<Sidebar />} path="/sidebar" />
-                        { !store.token ? <Route element={<Login />} path="/login" /> : <Route element={<RedirectToHome />} path="/login" /> }
-                        <Route element={<h1>Not found!</h1>} />
+                        <Route element={<Sidebar />} path="/sidebar" /> /* He dejado ell Sidebar aquí y renderiza todo excepto esto, cuando regrese revisaé la implementación por que no detecto el error*/
 
+                        <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
                 </ScrollToTop>
             </BrowserRouter>
-        </div>
     );
 };
 
