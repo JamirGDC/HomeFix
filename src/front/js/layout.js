@@ -14,6 +14,7 @@ import Questions from "./component/questions";
 import Manifest from "./component/manifest";
 import Navbar1 from "./component/navbar1";
 import Sidebar from "./component/sidebar";
+import Navbar3 from "./component/navbar3";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
@@ -58,6 +59,9 @@ const Layout = () => {
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
                     { store.token ? <Navbar /> : '' }
+                    <Navbar3 />
+                    <Navbar1 />
+                    <Sidebar />
                     <Routes>
 
                         <Route element={<Sign />} path="/sign" />

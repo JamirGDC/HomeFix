@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import "../styles/navbar3.css";
-import logo from '/workspaces/ProyectoFinal4Geeks/src/front/img/logo.png';
+import logo from '@img/logo.png';
 
 const navigation = [
     { name: 'HomeFix', href: '#', current: false },

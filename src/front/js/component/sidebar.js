@@ -8,7 +8,7 @@ import { TfiHome } from "react-icons/tfi";
 import { IoMailOutline, IoKeyOutline } from "react-icons/io5";
 import { GoPeople } from "react-icons/go";
 import { BsQuestionCircle } from "react-icons/bs";
-import logo from '/workspaces/ProyectoFinal4Geeks/src/front/img/logo.png';
+import logo from '@img/logo.png';
 
 const Sidebar = () => {
     const menus = [

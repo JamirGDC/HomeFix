@@ -32,7 +32,10 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['*', '.js']
+    extensions: ['*', '.js'],
+    alias: {
+      '@img': path.resolve(__dirname, 'src/front/img'),
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({
