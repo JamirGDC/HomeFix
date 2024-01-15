@@ -45,36 +45,43 @@ const Layout = () => {
     const basename = process.env.BASENAME || "";
     const { store, actions } = useContext(Context)
 
-    if(!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL/ >;
+    if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        if(token) {
+        if (token) {
             actions.updateToken(token);
         }
     }, [])
 
 
     return (
-            <BrowserRouter basename={basename}>
-                <ScrollToTop>
-                    { store.token ? <Navbar /> : '' }
-                    <Navbar3 />
-                    <Navbar1 />
-                    <Sidebar />
-                    <Routes>
+        <BrowserRouter basename={basename}>
+            <ScrollToTop>
+                {/* {store.token ? <Navbar /> : ''} */}
 
-                        <Route element={<Sign />} path="/sign" />
-                        <Route element={<About />} path="/about" />
-                        <Route element={<Questions />} path="/questions" />
-                        <Route element={<Manifest />} path="/manifest" />
-                        <Route element={<Sidebar />} path="/sidebar" /> /* He dejado ell Sidebar aquí y renderiza todo excepto esto, cuando regrese revisaé la implementación por que no detecto el error*/
-
-                        <Route element={<h1>Not found!</h1>} />
-                    </Routes>
-                    <Footer />
-                </ScrollToTop>
-            </BrowserRouter>
+                <div class="layout-container">
+                    <div class="top-nav">
+                        <Navbar3 />
+                        <Navbar1 />
+                    </div>
+                    <div class="content-container">
+                        <Sidebar />
+                        <div class="main-content">
+                            <Routes>
+                                <Route path="/sign" element={<Sign />} />
+                                <Route path="/login" element={<Login />} />
+                                <Route path="/about" element={<About />} />
+                                <Route path="/questions" element={<Questions />} />
+                                <Route path="/manifest" element={<Manifest />} />
+                                <Route path="*" element={<h1>Not Found</h1>} />
+                            </Routes>
+                        </div>
+                    </div>
+                </div>
+                <Footer />
+            </ScrollToTop>
+        </BrowserRouter>
     );
 };
 
