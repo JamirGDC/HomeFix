@@ -10,13 +10,8 @@ import "./index.css";
 import Layout from "./layout";
 import { ThemeProvider } from "@material-tailwind/react";
 //render your react application
-<<<<<<< HEAD
-ReactDOM.render(<Layout />, document.querySelector("#app"));
-
-=======
 ReactDOM.render(
     <ThemeProvider>
         <Layout />
     </ThemeProvider>
     , document.querySelector("#app"));
->>>>>>> sidebar-2

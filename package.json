@@ -7,10 +7,8 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"start": "npm run build:css && webpack-dev-server --config webpack.dev.js --port 3000",
-		"build": "npm run build:css && webpack --config webpack.prod.js",
-		"build:css": "postcss src/front/styles/index.css -o src/front/styles/index.css --use autoprefixer"
-
+		"start": "webpack-dev-server --config webpack.dev.js --port 3000",
+		"build": "webpack --config webpack.prod.js"
 	},
 	"author": {
 		"name": "Alejandro Sanchez",
@@ -53,10 +51,6 @@
 		"html-webpack-plugin": "^5.5.0",
 		"parse-github-url": "^1.0.2",
 		"postcss": "^8.4.33",
-<<<<<<< HEAD
-		"postcss-cli": "^11.0.0",
-=======
->>>>>>> sidebar-2
 		"prettier": "^2.5.1",
 		"remote-origin-url": "^2.0.0",
 		"style-loader": "^3.3.4",
@@ -89,8 +83,8 @@
 		"prop-types": "^15.6.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
+		"react-icons": "^5.0.1",
 		"react-polyfills": "0.0.1",
-		"react-router-dom": "^6.3.0",
-		"tailwindcss": "^3.4.1"
+		"react-router-dom": "^6.3.0"
 	}
 }
