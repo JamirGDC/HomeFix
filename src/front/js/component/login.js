@@ -24,6 +24,7 @@ const Login = () => {
                 <div className="flex flex-row justify-center align-stretch gap-y-2">
                     <img className="w-14 h-16" src={logo} alt="logo" />
                     <p className="text-4xl mt-3">HomeFix</p>
+
                 </div>
                 <span className="text-4xl">Bienvenido</span>
                 <span className="mb-4 text-gray-500">Ingresa tus datos</span>
