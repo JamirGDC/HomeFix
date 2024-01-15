@@ -6,14 +6,14 @@ Si ya tienes un codespaces abierto -> desde el principio
 si es un nuevo codespaces -> desde instalar postcss
 
 - posicionarse en la rama principal
-  git checkout main
+  - git checkout main
 - traer cambios recientes
-  git pull origin main
+  - git pull origin main
 - instalar postcss
-  npm install -g postcss
+  - npm install -g postcss
 - configurar url backend del .env
 - ejecutar npm
-  npm run start
+  - npm run start
   
 # WebApp boilerplate with React JS and Flask API
 
