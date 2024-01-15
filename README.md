@@ -1,8 +1,9 @@
 # WebApp boilerplate with React JS and Flask API
 Pasos para abrir en codespaces:
 
-Si ya tienes un codespaces abierto / desde el principio
-si es un nuevo codespaces desde instalar postcss
+Si ya tienes un codespaces abierto -> desde el principio
+
+si es un nuevo codespaces -> desde instalar postcss
 
 - posicionarse en la rama principal
   git checkout main
