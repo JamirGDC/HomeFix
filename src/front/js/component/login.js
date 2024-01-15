@@ -22,8 +22,8 @@ const Login = () => {
         <div className="flex flex-row justify-center items-center h-full p-16">
             <div className="flex flex-col justify-start align-stretch gap-y-2 w-[29rem] p-16 bg-gray-100 rounded-3xl" >
                 <div className="flex flex-row justify-center align-stretch gap-y-2">
-                    <img className="w-16 h-16" src={logo} alt="logo" />
-                    <p className="text-4xl">HomeFix</p>
+                    <img className="w-14 h-16" src={logo} alt="logo" />
+                    <p className="text-4xl mt-3">HomeFix</p>
                 </div>
                 <span className="text-4xl">Bienvenido</span>
                 <span className="mb-4 text-gray-500">Ingresa tus datos</span>
