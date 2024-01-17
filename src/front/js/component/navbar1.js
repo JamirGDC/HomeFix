@@ -16,7 +16,7 @@ function classNames(...classes) {
 
 const Navbar1 = () => {
     return (
-        <Disclosure as="nav" className="bg-white">
+        <Disclosure as="nav" className="bg-white flex content-center mt-[1rem]">
             {({ open }) => (
                 <>
                     <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">

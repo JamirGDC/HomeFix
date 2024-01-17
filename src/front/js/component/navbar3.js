@@ -3,6 +3,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import "../styles/navbar3.css";
 import logo from '@img/logo.png';
+import Navbar1 from "./navbar1";
 
 const navigation = [
     { name: 'HomeFix', href: '#', current: false },
@@ -40,8 +41,9 @@ const Navbar3 = () => {
                                 </div>
                             </div>
 
-                            <div className="flex flex-1 justify-center">
-                                <form className="flex w-full max-w-md">
+                            <div className="flex flex-1 justify-items-center content-center justify-center">
+                                <Navbar1 />
+                                {/* <form className="flex w-full max-w-md">
                                     <input
                                         type="text"
                                         placeholder="Search"
@@ -53,7 +55,7 @@ const Navbar3 = () => {
                                     >
                                         <MagnifyingGlassIcon className="h-5 w-5 text-gray-600" aria-hidden="true" />
                                     </button>
-                                </form>
+                                </form> */}
                             </div>
 
                             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">

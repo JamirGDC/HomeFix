@@ -33,6 +33,9 @@ module.exports = merge(common, {
           webSocketURL: publicUrl
         },
     },
+    resolve: {
+      extensions: ['.js', '.jsx', '.json'], // Agrega '.json' si es necesario
+    },
     plugins: [
         // new FriendlyErrorsWebpackPlugin(),
         // new ErrorOverlayPlugin(),
