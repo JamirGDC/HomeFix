@@ -16,9 +16,7 @@ const Sign = () => {
         setEmail('');
         setConfirmEmail
         setPassword('');
-        setConfirmPassword('');
-
-       
+        setConfirmPassword('');     
         navigate("/lobby");
     }
 
