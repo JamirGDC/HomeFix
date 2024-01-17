@@ -1,0 +1,17 @@
+.lobby {
+    max-width: 2000px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 30px;
+}
+
+.carousel-root {
+    max-width: 100%;
+    text-align: center;
+}
+
+.carousel-root img {
+    max-width: 100%;
+    height: auto;
+    padding: 5px;
+}

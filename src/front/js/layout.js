@@ -15,13 +15,14 @@ import Manifest from "./component/manifest";
 import Navbar1 from "./component/navbar1";
 import Sidebar from "./component/sidebar";
 import Navbar3 from "./component/navbar3";
+import Lobby from "./component/lobby";
 import { useNavigate } from "react-router-dom";
 
-const Home = () => {
-    return (<>
-        <h1>Estas logueado pibe!!!!</h1>
-    </>)
-}
+// const Home = () => {
+//     return (<>
+//         <h1>Estas logueado pibe!!!!</h1>
+//     </>)
+// }
 
 const RedirectToLogin = () => {
     const navigate = useNavigate();
@@ -69,6 +70,7 @@ const Layout = () => {
                         <Sidebar />
                         <div class="main-content">
                             <Routes>
+                                <Route path="/lobby" element={<Lobby />} />
                                 <Route path="/sign" element={<Sign />} />
                                 <Route path="/login" element={<Login />} />
                                 <Route path="/about" element={<About />} />
@@ -79,7 +81,7 @@ const Layout = () => {
                         </div>
                     </div>
                 </div>
-                <Footer />
+                {/* <Footer /> */}
             </ScrollToTop>
         </BrowserRouter>
     );
