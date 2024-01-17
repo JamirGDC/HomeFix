@@ -15,7 +15,7 @@ const Questions = () => {
       pregunta: '¿Qué funcionalidades te parecen más útiles?',
       opciones: ['Funcionalidad A', 'Funcionalidad B', 'Funcionalidad C', 'Otra'],
     },
-    // Agrega más preguntas según sea necesario
+    // Agregamos más preguntas si queremos
   ];
 
   const [respuestas, setRespuestas] = useState({});
