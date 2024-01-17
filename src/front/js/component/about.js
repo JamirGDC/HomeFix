@@ -35,7 +35,6 @@ const About = () => {
     },
   ];
 
-  // Estado para controlar la visibilidad del tooltip
   const [tooltipVisible, setTooltipVisible] = useState(null);
 
   return (
