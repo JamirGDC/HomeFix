@@ -1,0 +1,49 @@
+
+.container {
+    background-color: #fbf3f3;
+    border-radius: 8px;
+    box-shadow: 0 8px 8px rgba(48, 48, 48, 0.1);
+    padding: 20px;
+    margin: 20px auto;
+  }
+
+h2 {
+    color: #333;
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    
+    
+  }
+  
+  .card {
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 16px;
+    padding: 16px;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    box-shadow: 0 10px 20px rgba(71, 61, 61, 0.1);
+  }
+
+h3 {
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  p {
+    color: #666;
+    font-size: 14px;
+  }
+  
+  
