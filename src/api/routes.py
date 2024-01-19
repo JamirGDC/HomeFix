@@ -6,11 +6,31 @@ from api.models import db, User
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from werkzeug.security import generate_password_hash
 
 api = Blueprint('api', __name__)
 
-# Allow CORS requests to this API
 CORS(api)
+
+@api.route("/signup", methods=["POST"])
+def signup():
+    data = request.get_json()
+
+    email = data.get("email")
+    password = data.get("password")
+
+    if User.query.filter_by(email=email).first():
+        return jsonify({"msg": "Email already exists"}), 400
+
+    new_user = User(email=email, password=password, is_active=True)
+
+    db.session.add(new_user)
+    db.session.commit()
+
+    access_token = create_access_token(identity=new_user.id)
+
+    return jsonify({"token": access_token, "user_id": new_user.id}), 201
+
 
 
 @api.route('/hello', methods=['POST', 'GET'])
@@ -47,3 +67,5 @@ def protected():
     
     return jsonify({"id": user.id, "username": user.email }), 200
     # return jsonify({"id": "cualquier cosa" }), 200
+
+

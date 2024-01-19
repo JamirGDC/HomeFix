@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useRef } from "react";
 import SubMenu from "./SubMenu";
 import { motion } from "framer-motion";
-
+import NavBar from "./navbar";
 // * React icons
 import { IoIosArrowBack } from "react-icons/io";
 import { SlSettings } from "react-icons/sl";
@@ -33,6 +33,16 @@ const Sidebar = () => {
   const [open, setOpen] = useState(isTabletMid ? false : true);
   const sidebarRef = useRef();
   const { pathname } = useLocation();
+
+  const [isLoggedIn, setLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    setLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    setLoggedIn(false);
+  };
 
   useEffect(() => {
     if (isTabletMid) {
@@ -93,12 +103,15 @@ const Sidebar = () => {
   ];
 
   return (
+    
     <div>
+
       <div
         onClick={() => setOpen(false)}
         className={`md:hidden fixed inset-0 max-h-screen z-[998] bg-black/50 ${open ? "block" : "hidden"
           } `}
       ></div>
+      
       <motion.div
         ref={sidebarRef}
         variants={Nav_animation}
@@ -108,7 +121,17 @@ const Sidebar = () => {
             overflow-hidden md:relative fixed
          h-screen "
       >
-        
+
+        <div className=' max-w-[16rem] h-[4rem] w-[16rem]'>
+          <div className="flex items-center font-medium h-[4rem] border-b py-2 border-slate-300 gap-3 mx-3">
+            <img
+              src={logo}
+              width={45}
+              alt=""
+            />
+            <span className="text-xl whitespace-pre">HomeFix</span>
+          </div>
+        </div>
         <motion.div
           onClick={() => {
             setOpen(!open);
@@ -131,12 +154,12 @@ const Sidebar = () => {
         >
           <HiMenuAlt3 size={25} />
         </motion.div>
-        
+
 
         <div className="flex flex-col  h-full">
           <ul className="whitespace-pre px-2.5 text-[0.9rem] py-5 flex flex-col gap-1  font-medium overflow-x-hidden scrollbar-thin scrollbar-track-white scrollbar-thumb-slate-100   md:h-[90%] h-[90%]">
             <li>
-              <NavLink to={"/home"} className="link">
+              <NavLink to={"/authentication"} className="link">
                 <TfiHome size={23} className="min-w-max" />
                 Inicio
               </NavLink>
@@ -161,19 +184,19 @@ const Sidebar = () => {
               )}
             </li>
             <li>
-            <NavLink to={"/settings"} className="link">
+              <NavLink to={"/settings"} className="link">
                 <TbReportAnalytics size={23} className="min-w-max" />
                 Mis Publicaciones
               </NavLink>
             </li>
             <li>
-            <NavLink to={"/settings"} className="link">
+              <NavLink to={"/settings"} className="link">
                 <IoMailOutline size={23} className="min-w-max" />
                 Buzón
               </NavLink>
             </li>
             <li>
-            <NavLink to={"/settings"} className="link">
+              <NavLink to={"/settings"} className="link">
                 <AiOutlineHeart size={23} className="min-w-max" />
                 Favoritos
               </NavLink>

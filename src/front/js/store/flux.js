@@ -69,7 +69,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				setStore({ ...store, token: '' });
 				localStorage.setItem('token', '');
-			}
+			},
+			
+			signup: async (name, email, password) => {
+				const store = getStore();
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/api/signup`, {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify({ name, email, password })
+					});
+					const data = await response.json();
+					
+					
+
+					setStore({ ...store, token: data.token });
+					localStorage.setItem('token', data.token);
+
+				} catch (error) {
+					console.error("Error during signup:", error);
+				}
+			},
 		}
 	};
 };

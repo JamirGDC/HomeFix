@@ -4,15 +4,22 @@ import NavBar from "./sidebar/navbar";
 
 function RootLayout({ children }) {
   return (
-    <div className="flex flex-column">
-      <div>
-      <NavBar />
-      </div>
-      <div className="flex">
+    <div className="flex overflow-hidden" >
       <Sidebar />
-      <main className="max-w-5xl flex-1 mx-auto py-4">{children}</main>
-      </div>
+      <main className="max-w-full max-h-[100vh] flex-1 mx-auto overflow-auto">
+        {/* <div className='fixed w-[100%]'>
+          <div className='flex justify-end w-[calc(100%-16rem)]'><NavBar /></div>
+        
+        </div> */}
+        <div className=''>
+        <div className='flex sticky top-0 justify-end w-100'><NavBar /></div>
+
+        {children}</div></main>
     </div>
+
+
+
+    
   );
 }
 
