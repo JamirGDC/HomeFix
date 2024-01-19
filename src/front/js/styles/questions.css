@@ -1,15 +1,15 @@
 
 .container {
-    background-color: #fbf3f3;
+    background: linear-gradient(to right, #ffe7d6, #ffffff);
     border-radius: 8px;
-    box-shadow: 0 8px 8px rgba(48, 48, 48, 0.1);
-    padding: 20px;
-    margin: 20px auto;
+    box-shadow: 0 10px 10px rgba(18, 18, 18, 0.943);
+    padding: 100px;
+    margin: 30px auto;
   }
 
 h2 {
     color: #333;
-    font-size: 50px;
+    font-size: 30px;
     font-weight: bold;
     margin-bottom: 16px;
   }
@@ -17,7 +17,8 @@ h2 {
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
+    gap: 90px;
+    
     
     
   }
@@ -26,13 +27,10 @@ h2 {
     background-color: #fff;
     border: 2px solid #ddd;
     border-radius: 16px;
-    padding: 16px;
+    padding: 30px;
     transition: box-shadow 0.3s ease;
   }
   
-  .card:hover {
-    box-shadow: 0 10px 20px rgba(71, 61, 61, 0.1);
-  }
 
 h3 {
     color: #333;
@@ -42,8 +40,8 @@ h3 {
   }
   
   p {
-    color: #666;
-    font-size: 14px;
+    color: #1d1111;
+    font-size: 13px;
   }
   
   
