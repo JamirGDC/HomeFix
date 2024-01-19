@@ -70,8 +70,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ ...store, token: '' });
 				localStorage.setItem('token', '');
 			},
-			
-			signup: async (name, email, password) => {
+
+			signup: async ( email, password) => {
 				const store = getStore();
 				try {
 					const response = await fetch(`${process.env.BACKEND_URL}/api/signup`, {
@@ -79,7 +79,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						headers: {
 							'Content-Type': 'application/json'
 						},
-						body: JSON.stringify({ name, email, password })
+						body: JSON.stringify({ email, password })
 					});
 					const data = await response.json();
 					

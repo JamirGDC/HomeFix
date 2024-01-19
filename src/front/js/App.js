@@ -7,6 +7,7 @@ import Build from "./pages/Build";
 import Settings from "./pages/Settings";
 import Stroage from "./pages/Stroage";
 import Login from "./component/login";
+import Signup from "./component/signup";
 
 import React, { useContext, useEffect } from "react";
 import ScrollToTop from "./component/scrollToTop";
@@ -42,6 +43,8 @@ const App = () => {
       { store.token ? <Route element={<Home />} path="/home" />: <Route element={<RedirectToLogin />} path="/home" /> }
 
         <Route path="/home" element={<Home />} />
+        <Route path="/signup" element={<Signup />} />
+
         <Route path="/authentication" element={<Authentication />} />
         <Route path="/stroage" element={<Stroage />} />
         <Route path="/settings" element={<Settings />} />
