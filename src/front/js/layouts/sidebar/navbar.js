@@ -6,8 +6,6 @@ import { motion } from "framer-motion";
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
-
-
 // * React icons
 import { IoIosArrowBack } from "react-icons/io";
 import { SlSettings } from "react-icons/sl";
@@ -27,7 +25,6 @@ import { GoPeople } from "react-icons/go";
 import { BsQuestionCircle } from "react-icons/bs";
 import logo from '@img/logo.png';
 
-
 import { NavLink, useLocation, useRoutes } from "react-router-dom";
 
 
@@ -45,17 +42,10 @@ const NavBar = () => {
     };
 
     return (
-        <div className='flex bg-white w-full'>
-            <div className=' max-w-[16rem]  w-[16rem]'>
-                <div className="flex items-center font-medium border-b py-2 border-slate-300 gap-3 mx-3">
-                    <img
-                        src={logo}
-                        width={45}
-                        alt=""
-                    />
-                    <span className="text-xl whitespace-pre">HomeFix</span>
-                </div>
-            </div>
+
+
+        <div className='flex bg-white h-[4rem] w-full'>
+            
             <div className='w-[100%] flex justify-end '>
                 <div className='flex mx-3 justify-center items-center'>
                     {isLoggedIn ? (
@@ -64,10 +54,12 @@ const NavBar = () => {
                             <button className="text-white bg-black hover:bg-orange-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={handleLogout}>Salir</button>
                         </div>
                     ) : (
-                        <div>
-                            <button type="button" onClick={handleLogin} className="text-white bg-black hover:bg-orange-800 focus:outline-none focus:ring-4 focus:ring-orange-700 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">Ingresar</button>
 
-                           
+
+                        <div>
+                            <NavLink to={"/login"} className="link">
+                                <button type="button" onClick={handleLogin} className="text-white bg-black hover:bg-orange-800 focus:outline-none focus:ring-4 focus:ring-orange-700 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">Ingresar</button>
+                            </NavLink>
                         </div>
                     )}
                 </div>

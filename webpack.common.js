@@ -32,7 +32,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['*', '.js'],
+    "extensions": [".*", ".js", ".jsx", ".json"],
     alias: {
       '@img': path.resolve(__dirname, 'src/front/img'),
     },

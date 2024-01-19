@@ -33,7 +33,7 @@ export const Demo = () => {
 				})}
 			</ul>
 			<br />
-			<Link to="/">
+			<Link to="/login">
 				<button className="btn btn-primary">Back home</button>
 			</Link>
 		</div>
