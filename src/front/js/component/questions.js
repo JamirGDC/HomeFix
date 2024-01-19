@@ -1,63 +1,41 @@
-import React, { Component, useState } from "react";
+import React from "react";
 import "../styles/questions.css";
 
 
 const Questions = () => {
-  const preguntas = [
+  const questions = [
     {
-      id: 1,
-      pregunta: '¿Cómo calificarías tu experiencia general con la aplicación?',
-      opciones: ['Excelente', 'Bueno', 'Regular', 'Malo'],
+      question: "¿Cómo puedo solicitar un servicio?",
+      answer: "Puedes solicitar un servicio seleccionando la categoría y el profesional deseado, luego sigue los pasos para completar la solicitud y realizar el pago.",
     },
     {
-      id: 2,
-      pregunta: '¿Qué funcionalidades te parecen más útiles?',
-      opciones: ['Funcionalidad A', 'Funcionalidad B', 'Funcionalidad C', 'Otra'],
+      question: "¿Cómo puedo pagar por los servicios?",
+      answer: "Ofrecemos una pasarela de pago segura. Puedes realizar el pago con tarjeta de crédito o débito para confirmar tu solicitud de servicio.",
     },
-    // Agregamos más preguntas si queremos
+    {
+      question: "¿Cómo califico a un profesional?",
+      answer: "Después de completar el servicio, puedes calificar al profesional y dejar comentarios sobre tu experiencia. Tu retroalimentación es valiosa para nosotros y otros usuarios.",
+    },
+    {
+      question: "¿Cómo puedo cambiar la ciudad para ver profesionales en otra área?",
+      answer: "Puedes cambiar la ciudad en la configuración de tu perfil o en la página de inicio. Esto te permitirá ver profesionales disponibles en diferentes áreas geográficas.",
+    },
+    // Si queremos agregamos mas preguntas y respuestas
   ];
 
-  const [respuestas, setRespuestas] = useState({});
-
-  const handleRespuesta = (preguntaId, respuesta) => {
-    setRespuestas((prevRespuestas) => ({
-      ...prevRespuestas,
-      [preguntaId]: respuesta,
-    }));
-  };
-
   return (
-    <div className="container mx-auto mt-8">
-      <h1 className="text-2xl font-bold mb-4">Encuesta para Profesionales del Hogar</h1>
-      <div className="grid grid-cols-1 gap-4">
-        {preguntas.map((pregunta) => (
-          <div key={pregunta.id} className="bg-white p-4 rounded shadow">
-            <p className="font-semibold">{pregunta.pregunta}</p>
-            <div className="mt-2">
-              {pregunta.opciones.map((opcion) => (
-                <label key={opcion} className="inline-flex items-center">
-                  <input
-                    type="radio"
-                    name={`pregunta${pregunta.id}`}
-                    value={opcion}
-                    checked={respuestas[pregunta.id] === opcion}
-                    onChange={() => handleRespuesta(pregunta.id, opcion)}
-                    className="form-radio text-blue-500 focus:ring-2 focus:ring-blue-300"
-                  />
-                  <span className="ml-2">{opcion}</span>
-                </label>
-              ))}
-            </div>
+    <div className="container mx-auto p-8">
+      <h2 className="text-2xl font-bold mb-4">Preguntas Frecuentes</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {questions.map((question, index) => (
+          <div key={index} className="border border-solid border p-1 lg:rounded-lg border-gray-300 p-1">
+            <h3 className="text-lg font-semibold mb-2">{question.question}</h3>
+            <p>{question.answer}</p>
           </div>
         ))}
       </div>
-      <button className="mt-4 bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
-        Enviar respuestas
-      </button>
     </div>
   );
 };
-
-
 
 export default Questions;
