@@ -96,7 +96,7 @@ import Card from "./card";
 const Lobby = () => {
   return (<>
     <div class="w-[100vw] min-h-screen bg-gray-100 flex flex-column justify-center items-center">
-      <div class="">
+      <div classname="">
 
 
         <div class="w-[100%] flex content-center justify-center mt-[2rem] text-3xl font-bold">
