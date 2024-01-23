@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import json
 
 db = SQLAlchemy()
 
@@ -26,15 +27,18 @@ class Product(db.Model):
     description = db.Column(db.Text, nullable=False)
     price = db.Column(db.Float, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    images_urls = db.Column(db.String(2000))  # Ajusta la longitud según sea necesario
 
-    def __repr__(self):
-        return f'<Producto {self.name}>'
+
 
     def serialize(self):
+        images_urls = json.loads(self.images_urls) if self.images_urls else []
+
         return {
-            "id": self.id,
-            "name": self.name,
-            "description": self.description,
-            "price": self.price,
-            "vendedor": self.seller.serialize(),
+                "id": self.id,
+                "name": self.name,
+                "description": self.description,
+                "price": self.price,
+                "vendedor": self.seller.serialize(),
+                "images_urls": images_urls, 
         }

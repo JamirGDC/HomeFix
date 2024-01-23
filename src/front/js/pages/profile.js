@@ -1,62 +1,73 @@
-import React from "react";
-import {
-  Tabs,
-  TabsHeader,
-  TabsBody,
-  Tab,
-  TabPanel,
-} from "@material-tailwind/react";
-import {
-  Square3Stack3DIcon,
-  UserCircleIcon,
-  Cog6ToothIcon,
-} from "@heroicons/react/24/solid";
- 
-export function Profile() {
-  const data = [
-    {
-      label: "Dashboard",
-      value: "dashboard",
-      icon: Square3Stack3DIcon,
-      desc: `It really matters and then like it really doesn't matter.
-      What matters is the people who are sparked by it. And the people
-      who are like offended by it, it doesn't matter.`,
-    },
-    {
-      label: "Profile",
-      value: "profile",
-      icon: UserCircleIcon,
-      desc: `Because it's about motivating the doers. Because I'm here
-      to follow my dreams and inspire other people to follow their dreams, too.`,
-    },
-    {
-      label: "Settings",
-      value: "settings",
-      icon: Cog6ToothIcon,
-      desc: `We're not always in the position that we want to be at.
-      We're constantly growing. We're constantly making mistakes. We're
-      constantly trying to express ourselves and actualize our dreams.`,
-    },
-  ];
+import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import PerfilComponent from '../component/PerfilComponent';
+import ChatComponent from '../component/ChatComponent';
+import NuevaPublicacion from '../component/NuevaPublicacion';
+import PublicacionesComponent from '../component/PublicacionesComponent';
+
+const Profile = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState('perfil');
+
+  useEffect(() => {
+    const path = location.pathname.toLowerCase();
+    if (path.includes('chat')) {
+      setActiveTab('chat');
+    } else if (path.includes('publicaciones')) {
+      setActiveTab('publicaciones');
+    }else if (path.includes('nuevapublicacion')) {
+      setActiveTab('nuevapublicacion');
+    }  
+    else {
+      setActiveTab('perfil');
+    }
+  }, [location]);
+
+  const handleTabClick = (tab) => {
+    // Actualiza la ruta al cambiar de pestaña
+    navigate(`/profile/${tab.toLowerCase()}`);
+
+    setActiveTab(tab);
+  };
+
   return (
-    <Tabs value="dashboard">
-      <TabsHeader>
-        {data.map(({ label, value, icon }) => (
-          <Tab key={value} value={value}>
-            <div className="flex items-center gap-2">
-              {React.createElement(icon, { className: "w-5 h-5" })}
-              {label}
-            </div>
-          </Tab>
-        ))}
-      </TabsHeader>
-      <TabsBody>
-        {data.map(({ value, desc }) => (
-          <TabPanel key={value} value={value}>
-            {desc}
-          </TabPanel>
-        ))}
-      </TabsBody>
-    </Tabs>
+    <div className="max-w-screen-lg mx-auto mt-8">
+      <div className="flex space-x-4">
+        <button
+          onClick={() => handleTabClick('perfil')}
+          className={`px-4 py-2 rounded focus:outline-none ${activeTab === 'perfil' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+        >
+          Perfil
+        </button>
+        <button
+          onClick={() => handleTabClick('chat')}
+          className={`px-4 py-2 rounded focus:outline-none ${activeTab === 'chat' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+        >
+          Chat
+        </button>
+        <button
+          onClick={() => handleTabClick('publicaciones')}
+          className={`px-4 py-2 rounded focus:outline-none ${activeTab === 'publicaciones' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+        >
+          Mis Publicaciones
+        </button>
+        <button
+          onClick={() => handleTabClick('nuevapublicacion')}
+          className={`px-4 py-2 rounded focus:outline-none ${activeTab === 'nuevapublicacion' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+        >
+          Subir Publicación
+        </button>
+      </div>
+
+      <div className="mt-4">
+        {activeTab === 'perfil' && <PerfilComponent />}
+        {activeTab === 'chat' && <ChatComponent />}
+        {activeTab === 'publicaciones' && <PublicacionesComponent />}
+        {activeTab === 'nuevapublicacion' && <NuevaPublicacion />}
+      </div>
+    </div>
   );
-}
+};
+
+export default Profile;

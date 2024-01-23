@@ -7,6 +7,7 @@ from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from werkzeug.security import generate_password_hash
+import json
 
 api = Blueprint('api', __name__)
 
@@ -80,12 +81,15 @@ def create_product():
         name = data.get("name")
         description = data.get("description")
         price = data.get("price")
+        images_urls = json.dumps(data.get("images_urls"))
 
         new_product = Product(
             name=name,
             description=description,
             price=price,
-            seller=user  # Asociamos el producto con el usuario actual
+            seller=user, 
+            images_urls=images_urls,
+
         )
 
         db.session.add(new_product)

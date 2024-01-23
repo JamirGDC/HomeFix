@@ -97,26 +97,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error("Error during signup:", error);
 				}
 			},
-			createProduct: async (name, description, price) => {
+			createProduct: async (name, description, price, images_urls) => {
 				const store = getStore();
 				try {
-					const response = await fetch(`${process.env.BACKEND_URL}/api/products`, {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json',
-							'Authorization': `Bearer ${store.token}`
-						},
-						body: JSON.stringify({ name, description, price })
-					});
-					const data = await response.json();
-
-					const updatedProducts = [...store.products, data];
-					setStore({ ...store, products: updatedProducts });
-
+				  const response = await fetch(`${process.env.BACKEND_URL}/api/products`, {
+					method: 'POST',
+					headers: {
+					  'Content-Type': 'application/json',
+					  'Authorization': `Bearer ${store.token}`
+					},
+					body: JSON.stringify({ name, description, price, images_urls })
+				  });
+				  const data = await response.json();
+			  
+				  const updatedProducts = [...store.products, data];
+				  setStore({ ...store, products: updatedProducts });
 				} catch (error) {
-					console.error("Error during product creation:", error);
+				  console.error("Error during product creation:", error);
 				}
-			},
+			  },
+			  
 			getAllProducts: async () => {
 				const store = getStore();
 				try {
