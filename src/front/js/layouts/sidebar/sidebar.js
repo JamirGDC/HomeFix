@@ -184,13 +184,13 @@ const Sidebar = () => {
               )}
             </li>
             <li>
-              <NavLink to={"/profile"} className="link">
+              <NavLink to={"/profile/publicaciones"} className="link">
                 <TbReportAnalytics size={23} className="min-w-max" />
                 Mis Publicaciones
               </NavLink>
             </li>
             <li>
-              <NavLink to={"/settings"} className="link">
+              <NavLink to={"/profile/chat"} className="link">
                 <IoMailOutline size={23} className="min-w-max" />
                 Buzón
               </NavLink>

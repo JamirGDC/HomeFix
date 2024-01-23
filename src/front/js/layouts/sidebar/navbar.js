@@ -41,6 +41,8 @@ const NavBar = () => {
         setLoggedIn(false);
     };
 
+    const isUserAuthenticated = !!localStorage.getItem('token');
+
     return (
 
 
