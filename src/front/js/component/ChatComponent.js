@@ -6,8 +6,8 @@ const ChatComponent = () => {
 
   //traemos username y usersecret del store
   const { store, actions } = useContext(Context);
-  const username = store.email;
-  const usersecret = store.email;
+  const username = localStorage.email;
+  const usersecret = localStorage.email;
 
 
   return (
