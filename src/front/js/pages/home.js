@@ -4,17 +4,19 @@ import React, { useEffect, useContext } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-
-import SearchBar from '../component/searchbar';
+import Professions from '../component/professions';
+import SearchBar from '../layouts/sidebar/searchbar';
 
 import { useState } from 'react';
 import { Context } from '../store/appContext';
 import profilePicture from '../../img/profile-picture.jpg';
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const { store, actions } = useContext(Context);
   const [loading, setLoading] = useState(true);
-
+  const navigate = useNavigate();
+  
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -42,13 +44,17 @@ const Home = () => {
     slidesToScroll: 1
   };
 
+  const contactar =  () => {
+
+    navigate("/profile/chat");
+}
+
   return (
-    <div className='w-[90%] m-auto'>
-      <div>
-        <SearchBar />
-      </div>
+    
+    <div className='w-[90%] m-auto z-[0]'>
+      
       <h2 className='my-3'>Últimas Publicaciones</h2>
-      <div className='card-container w-full flex justify-between flex-wrap'>
+      <div className='card-container w-full flex justify-between flex-wrap gap-y-16 z-[0]'>
         {store.products.map((product) => (
           <div className='card' key={product.id}>
             <Slider {...settings}>
@@ -57,7 +63,7 @@ const Home = () => {
                   <img className='w-full h-[200px] object-cover' src={image} alt='' key={index} />
                 ))
               ) : (
-                <p>No images available</p>
+                <img className='w-full h-[200px] object-cover' src={profilePicture} alt='' />
               )}
             </Slider>
             <div className='p-3 flex-col gap-3'>
@@ -70,22 +76,17 @@ const Home = () => {
               <div>
                 <span className='text-sm'>{product.description}</span>
                 <div className='flex items-center gap-2 mt-1'>
-                  <span className='text-sm line opacity-50'>A Coruña</span>
-                  <span className='discount-percent'>A 20km de ti</span>
+                  <span className='text-sm line opacity-50'>{product.seller.email}</span>
+                  {/* <span className='discount-percent'>A 20km de ti</span> */}
                 </div>
               </div>
               <span className='flex items-center mt-1'>
-                <span>⭐️</span>
-                <span>⭐️</span>
-                <span>⭐️</span>
-                <span>⭐️</span>
-                <span>⭐️</span>
-
-                <span className='text-xs ml-2 text-gray-500'>50 comentarios</span>
+                {/* <span>⭐️</span> */}
+                <span className='text-xs ml-2 text-gray-500'>{product.seller.email}</span>
               </span>
 
               <div className='mt-3 flex gap-2'>
-                <button className='button-primary'>Contactar</button>
+                 <button className='button-primary bg-[#2A2A2A]' onClick={contactar}>Contactar</button>
 
                 <button className='button-icon'>
                   <span className='opacity-50'>♥️</span>
@@ -97,6 +98,9 @@ const Home = () => {
             </div>
           </div>
         ))}
+      </div>
+      <div className='mt-5'>
+        <Professions />
       </div>
     </div>
   );
