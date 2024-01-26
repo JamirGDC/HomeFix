@@ -9,6 +9,11 @@ import Profile from './pages/profile';
 import Stroage from './pages/Stroage';
 import Login from './component/login';
 import Signup from './component/signup';
+import Politicaprivacidad from './component/politicaprivacidad';
+import Contactanos from './component/contactanos';
+import About from './component/about';
+import Questions from "./component/questions.js";
+import CompletePerfil from "./component/completeperfil.js";
 import CreateProduct from './component/createproduct';
 import NuevaPublicacion from './component/NuevaPublicacion';
 import Card from './component/card';
@@ -26,18 +31,18 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
 
-        {store.token ? (
-          <Route element={<Home />} path="/home" />
-        ) : (
-          <Route
-            element={isUserAuthenticated ? <Navigate to="/home" /> : <Login />}
-            path="/home"
-          />
-        )}
+        {/* <Route element={!store.token ? <Login /> : <Navigate to="/home" />} path="/login" /> */}
 
+
+        <Route path="/home" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/card" element={<Card />} />
+        <Route path="/politicaprivacidad" element={<Politicaprivacidad />} />
+        <Route path="/questions" element={<Questions />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contactanos" element={<Contactanos />} />
         <Route path="/createproduct" element={<CreateProduct />} />
+        <Route path="/completeperfil" element={<CompletePerfil />} />
 
         <Route path="/authentication" element={<Authentication />} />
         <Route path="/stroage" element={<Stroage />} />

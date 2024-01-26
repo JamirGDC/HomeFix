@@ -4,19 +4,28 @@ import { Context } from '../store/appContext';
 import { useNavigate } from "react-router-dom";
 import logo from '@img/logo.png';
 
-
-
 const Signup = () => {
     const [email, setEmail] = useState('');
+    const [username, setUsername] = useState(''); 
     const [password, setPassword] = useState('');
     const { actions } = useContext(Context);
     const navigate = useNavigate();
+
+    const secret = email;
+
 
     const register = async () => {
         await actions.signup(email, password);
         setEmail('');
         setPassword('');
-        navigate("/home");
+        navigate("/completeperfil");
+    }
+
+    const registerchat = async () => {
+        await actions.createuser(email, secret, username);
+        setEmail('');
+        setSecret('');
+        setUsername('');
     }
 
     return (<>
@@ -30,9 +39,9 @@ const Signup = () => {
                 <span className="text-4xl">Registro</span>
                 <span className="mb-4 text-gray-500">Ingresa tus datos</span>
                 <span className="text-sm">Usuario</span>
-                <input className="border-slate-300 placeholder:italic placeholder:text-slate-400 border focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm py-2 pl-4 pr-3 shadow-sm rounded-md h-10" type="text" placeholder="name@company.com" value={email} onChange={e => setEmail(e.target.value)} />
+                <input className="border-slate-300 placeholder:italic placeholder:text-slate-400 border focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm py-2 pl-4 pr-3 shadow-sm rounded-md h-10" type="text" placeholder="name@company.com" value={email} onChange={e => {setEmail(e.target.value); setUsername(e.target.value)} } />
                 <span className="text-sm">Contraseña</span>
-                <input className="border-slate-300 placeholder:italic placeholder:text-slate-400 border focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm py-2 pl-4 pr-3 shadow-sm rounded-md h-10" type="password" placeholder="********" value={password} onChange={e => setPassword(e.target.value)} />
+                <input className="border-slate-300 placeholder:italic placeholder:text-slate-400 border focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm py-2 pl-4 pr-3 shadow-sm rounded-md h-10" type="password" placeholder="********" value={password} onChange={e => setPassword(e.target.value) } />
                 {/* <div className="mb-5 flex justify-between items-center">
                     <label htmlFor="recordar" className="flex items-center">
                         <input type="checkbox" id="recordar" className="mr-2" />
@@ -41,7 +50,7 @@ const Signup = () => {
                     <span className="text-sm ml-2"><a href="">¿Olvidaste la contraseña?</a></span>
                 </div> */}
 
-                <button className="bg-[#3b3c3a] text-sm hover:bg-[#d77733] text-white py-2 px-4 rounded-md" onClick={register}>Registrarse</button>
+                <button className="bg-[#3b3c3a] text-sm hover:bg-[#d77733] text-white py-2 px-4 rounded-md" onClick={() => { register(); registerchat(); }}>Registrarse</button>
                 <button className="bg-[#000000] text-sm hover:bg-[#d77733] text-white py-2 px-4 rounded-md" onClick={register}>Registrarse con Apple</button>
                 <button className="bg-[#ffffff] text-sm hover:bg-[#d77733] text-black py-2 px-4 rounded-md" onClick={register}>Registrarse con Google</button>
                 <div className="flex mt-4 justify-center items-center">

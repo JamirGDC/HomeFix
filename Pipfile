@@ -19,6 +19,8 @@ cloudinary = "*"
 flask-admin = "*"
 typing-extensions = "*"
 flask-jwt-extended= "*"
+requests = "*"
+mangopaysdk = "*"
 
 [requires]
 python_version = "3.10"

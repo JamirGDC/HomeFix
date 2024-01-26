@@ -11,25 +11,25 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="bg-gray-100 p-4">
-      <div className="max-w-2xl mx-auto">
+    <div className="flex content-center justify-center h-[3rem]">
+      <div className="max-w-xl mx-auto flex flex-row">
         <input
           type="text"
           placeholder="Buscar..."
-          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+          className="w-full border pl-[20px] rounded-l-full focus:outline-none focus:ring focus:border-orange-300"
         />
-        <div className="mt-4 flex space-x-4">
+        <div className="flex">
           {/* Filtro de Provincias */}
-          <select className="w-1/2 p-2 border rounded-md">
-            <option value="">Todas las provincias</option>
+          <select className="w-1/2 border">
+            <option value="">provincia</option>
             {provinces.map((province) => (
               <option key={province} value={province}>{province}</option>
             ))}
           </select>
 
           {/* Filtro de Profesiones */}
-          <select className="w-1/2 p-2 border rounded-md">
-            <option value="">Todas las profesiones</option>
+          <select className="w-1/2 border">
+            <option value="">profesion</option>
             {professions.map((profession) => (
               <option key={profession} value={profession}>{profession}</option>
             ))}
@@ -38,7 +38,7 @@ const SearchBar = () => {
 
         {/* Botón Aplicar */}
         <button
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+          className="px-4 py-2 rounded-r-full bg-[#2A2A2A] text-white hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
           onClick={handleApplyFilter}
         >
           Aplicar
