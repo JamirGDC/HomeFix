@@ -24,6 +24,7 @@ import injectContext, { Context } from "./store/appContext";
 
 const App = () => {
   const { store } = React.useContext(Context);
+  const { store } = React.useContext(Context);
   const isUserAuthenticated = !!localStorage.getItem('token');
 
   return (
@@ -50,10 +51,15 @@ const App = () => {
         {/* Integración de las pestañas de perfil */}
         <Route path="/profile/*" element={<Profile />} />
 
+        {/* Integración de las pestañas de perfil */}
+        <Route path="/profile/*" element={<Profile />} />
+
+        {!store.token ? (
         {!store.token ? (
           <Route element={isUserAuthenticated ? <Navigate to="/home" /> : <Login />} path="/login" />
         ) : (
           <Route element={<Navigate to="/home" />} path="/login" />
+        )}
         )}
 
         <Route path="/analytics/:aID" element={<Analytics />} />

@@ -236,7 +236,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const updatedProducts = [...store.products, data];
 					setStore({ ...store, products: updatedProducts });
 				} catch (error) {
-					console.error("Error during product creation:", error);
+				  console.error("Error during product creation:", error);
 				}
 			},
 
