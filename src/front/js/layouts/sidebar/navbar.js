@@ -42,8 +42,10 @@ const NavBar = () => {
         setLoggedIn(true);
     };
 
-    const handleLogout = () => {
+    const handleLogout = async() => {
         setLoggedIn(false);
+        await actions.clearToken();
+        navigate("/home");
     };
 
     const logout = async () => {
@@ -56,16 +58,16 @@ const NavBar = () => {
     return (
 
 
-        <div className='flex  bg-white h-[4rem] w-full z-[999]'>
+        <div className='flex bg-white h-[4rem] w-full z-[999]'>
 
             <div className='w-full flex content-center justify-center mt-[8px]'><SearchBar /></div>
-            
+
             <div className='flex justify-end '>
                 <div className='flex mx-3 justify-center items-center'>
                     {isLoggedIn ? (
                         <div>
                             {/* <img className='w-[2rem] h-[2rem]' src={logo} alt="Imagen de perfil" /> */}
-                            <button className="text-white bg-black hover:bg-orange-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={logout}>Salir</button>
+                            <button className="text-white bg-black hover:bg-orange-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={handleLogout}>Salir</button>
                         </div>
                     ) : (
 

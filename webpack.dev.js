@@ -2,6 +2,9 @@ const webpack = require('webpack');
 const path = require('path');
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const { HotModuleReplacementPlugin } = require('webpack');
+
 // const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 
 const port = 3000;
@@ -50,6 +53,10 @@ module.exports = merge(common, {
         //     semi: true,                 // Print semicolons at the ends of statements.
         //     encoding: 'utf-8'           // Which encoding scheme to use on files
         // }),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new ReactRefreshWebpackPlugin(),
+
     ]
+   
+
 });

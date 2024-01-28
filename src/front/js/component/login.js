@@ -18,6 +18,9 @@ const Login = () => {
         navigate("/home");
     }
 
+    const onChange = ({ target }) => setEmail(target.value);
+
+
     return (<>
         <div className="flex flex-row justify-center items-center h-full p-16">
             <div className="flex flex-col justify-start align-stretch gap-y-2 w-[29rem] p-16 bg-gray-100 rounded-3xl" >

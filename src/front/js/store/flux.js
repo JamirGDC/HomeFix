@@ -1,3 +1,5 @@
+
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -178,24 +180,47 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			setToken: async (email, password) => {
 				const store = getStore();
-				const response = await fetch(`${process.env.BACKEND_URL}/api/token`, {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify({ email, password })
-				});
-				const data = await response.json();
-				setStore({ ...store, token: data.token, email: data.email, userbe_id: data.userbe_id});
-				localStorage.setItem('token', data.token, 'email', data.email);
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/api/token`, {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify({ email, password })
+					});
+			
+					if (!response.ok) {
+						// Si la respuesta no es exitosa, lanzar un error con el mensaje de error
+						const errorData = await response.json();
+						throw new Error(errorData.message || 'Error de inicio de sesión');
+					}
+			
+					// Si la respuesta es exitosa, obtener los datos de la respuesta
+					const data = await response.json();
+					// Actualizar el store con los datos recibidos
+					setStore({ ...store, token: data.token, email: data.email, userbe_id: data.userbe_id });
+					// Almacenar el token en el almacenamiento local
+					localStorage.setItem('token', data.token);
+					// Devolver los datos
+					return { status: response.status, data: data };
+				} catch (error) {
+					// Manejar errores de red o de otra índole
+					console.error('Error de inicio de sesión:', error);
+					throw error;
+				}
 			},
-
+			
 
 
 			clearToken: () => {
 				const store = getStore();
 				setStore({ ...store, token: '' });
 				localStorage.setItem('token', '');
+				localStorage.setItem('email', '');
+				localStorage.setItem('userbe_id', '');
+				localStorage.setItem('username', '');
+				localStorage.setItem('mangoid', '');
+				
 			},
 
 			signup: async (email, password) => {

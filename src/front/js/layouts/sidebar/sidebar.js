@@ -164,7 +164,7 @@ const Sidebar = () => {
                 Inicio
               </NavLink>
             </li>
-            <li>
+            {/* <li>
               <NavLink to={"/authentication"} className="link">
                 <HiOutlineCollection size={23} className="min-w-max" />
                 Publicaciones
@@ -175,7 +175,7 @@ const Sidebar = () => {
                 <GrUserWorker size={23} className="min-w-max" />
                 Profesionales
               </NavLink>
-            </li>
+            </li> */}
             <li className='border-y py-3 border-slate-300'>
               {open && (
                 <small className="pl-3 text-slate-500 inline-block mb-2">
@@ -186,19 +186,13 @@ const Sidebar = () => {
             <li>
               <NavLink to={"/profile/publicaciones"} className="link">
                 <TbReportAnalytics size={23} className="min-w-max" />
-                Mis Publicaciones
+                Mis datos
               </NavLink>
             </li>
             <li>
               <NavLink to={"/profile/chat"} className="link">
                 <IoMailOutline size={23} className="min-w-max" />
                 Buzón
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to={"/settings"} className="link">
-                <AiOutlineHeart size={23} className="min-w-max" />
-                Favoritos
               </NavLink>
             </li>
             <li className='border-b py-3 border-slate-300'>

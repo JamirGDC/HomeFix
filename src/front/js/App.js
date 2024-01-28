@@ -1,5 +1,7 @@
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import ScrollToTop from "./component/scrollToTop";
+
 import RootLayout from './layouts/RootLayout';
 import Home from './pages/home';
 import Analytics from './pages/Analytics';
@@ -19,46 +21,57 @@ import NuevaPublicacion from './component/NuevaPublicacion';
 import Card from './component/card';
 // import { Context } from './store/appContext';
 import injectContext, { Context } from "./store/appContext";
+import { ThemeProvider } from "@material-tailwind/react";
+import { Dashboard, Auth } from "../js/layouts";
+
 
 
 
 const App = () => {
   const { store } = React.useContext(Context);
   const isUserAuthenticated = !!localStorage.getItem('token');
+  const basename = process.env.BASENAME || "";
 
   return (
-    <RootLayout>
+    
       <Routes>
-        <Route path="/" element={<Home />} />
-
-        {/* <Route element={!store.token ? <Login /> : <Navigate to="/home" />} path="/login" /> */}
-
-
-        <Route path="/home" element={<Home />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/card" element={<Card />} />
-        <Route path="/politicaprivacidad" element={<Politicaprivacidad />} />
-        <Route path="/questions" element={<Questions />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contactanos" element={<Contactanos />} />
-        <Route path="/createproduct" element={<CreateProduct />} />
-        <Route path="/completeperfil" element={<CompletePerfil />} />
-
-        <Route path="/authentication" element={<Authentication />} />
-        <Route path="/stroage" element={<Stroage />} />
-
-        {/* Integración de las pestañas de perfil */}
-        <Route path="/profile/*" element={<Profile />} />
-
-        {!store.token ? (
-          <Route element={isUserAuthenticated ? <Navigate to="/home" /> : <Login />} path="/login" />
-        ) : (
-          <Route element={<Navigate to="/home" />} path="/login" />
-        )}
-
-        <Route path="/analytics/:aID" element={<Analytics />} />
+        <Route path="/dashboard/*" element={<Dashboard />} />
+        <Route path="/auth/*" element={<Auth />} />
+        <Route path="*" element={<Navigate to="/dashboard/home" replace />} />
       </Routes>
-    </RootLayout>
+    
+    // <RootLayout>
+    //   <Routes>
+    //     <Route path="/" element={<Home />} />
+
+    //     {/* <Route element={!store.token ? <Login /> : <Navigate to="/home" />} path="/login" /> */}
+
+
+    //     <Route path="/home" element={<Home />} />
+    //     <Route path="/signup" element={<Signup />} />
+    //     <Route path="/card" element={<Card />} />
+    //     <Route path="/politicaprivacidad" element={<Politicaprivacidad />} />
+    //     <Route path="/questions" element={<Questions />} />
+    //     <Route path="/about" element={<About />} />
+    //     <Route path="/contactanos" element={<Contactanos />} />
+    //     <Route path="/createproduct" element={<CreateProduct />} />
+    //     <Route path="/completeperfil" element={<CompletePerfil />} />
+
+    //     <Route path="/authentication" element={<Authentication />} />
+    //     <Route path="/stroage" element={<Stroage />} />
+
+    //     {/* Integración de las pestañas de perfil */}
+    //     <Route path="/profile/*" element={<Profile />} />
+
+    //     {!store.token ? (
+    //       <Route element={isUserAuthenticated ? <Navigate to="/home" /> : <Login />} path="/login" />
+    //     ) : (
+    //       <Route element={<Navigate to="/home" />} path="/login" />
+    //     )}
+
+    //     <Route path="/analytics/:aID" element={<Analytics />} />
+    //   </Routes>
+    // </RootLayout>
   );
 };
 

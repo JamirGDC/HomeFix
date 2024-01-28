@@ -34,6 +34,10 @@ handler = APIRequest(sandbox=True)
 from mangopay.resources import (User, NaturalUser)
 from mangopay.utils import Address
 from mangopay.resources import Wallet
+from mangopay.resources import Transfer
+from mangopay.resources import DirectPayIn
+from mangopay.resources import Money
+from mangopay.resources import PayPalPayIn
 
 
 
@@ -50,6 +54,73 @@ def details_client():
 
     return jsonify({'success': True,  'wallet_balance': str(balance)})
 
+
+@api.route('/transfer', methods=['POST'])
+def transfer_funds():
+    data = request.json
+    print(data)
+    debited_funds = data.get('debited_funds')
+    amount = debited_funds.get('amount')  # Obtener el monto
+    currency = debited_funds.get('currency') 
+
+    fees_funds = data.get('fees')
+    amountfees = fees_funds.get('amount')  # Obtener el monto
+    currencyfees = fees_funds.get('currency')
+
+
+    # Obtener los datos necesarios de la solicitud JSON
+    author = 213999456,
+    author_id = "213993872",
+
+    credited_user = data.get('credited_user')
+    debited_funds_amount = Money(amount, currency)
+    fees = Money(amountfees, currencyfees)
+    debited_wallet = data.get('debited_wallet')
+    credited_wallet = data.get('credited_wallet')
+
+
+
+    # Realizar la transferencia de fondos
+
+    transfer = Transfer(author=author, 
+                    credited_user=credited_user, 
+                    debited_funds=debited_funds_amount, 
+                    fees=fees, 
+                    debited_wallet=debited_wallet, 
+                    credited_wallet=credited_wallet)
+    transfer.save()
+
+    # author = "213995910",
+    # debited_funds = Money(1000, 'EUR')
+    # fees = Money(100, 'EUR')
+    # credited_wallet_id = "213994172"
+    # card_id = "213994171"
+    # secure_mode = "DEFAULT"
+    # secure_mode_return_url = "https://www.ulule.com/"
+
+    # # Realizar la transferencia de fondos
+    # transfer = DirectPayIn(author=author, 
+    #                 debited_funds=debited_funds, 
+    #                 fees=fees, 
+    #                 credited_wallet_id=credited_wallet_id, 
+    #                 card_id=card_id, 
+    #                 secure_mode=secure_mode, 
+    #                 secure_mode_return_url=secure_mode_return_url)
+    # transfer.save()
+    
+    return jsonify({'message': 'Transfer completed successfully'}), 200
+
+@api.route('/paypal', methods=['POST'])
+def paypal():
+    paypal_payin = PayPalPayIn(author="213999456",
+                           debited_funds=Money(amount=100, currency='EUR'),
+                           fees=Money(amount=1, currency='EUR'),
+                           return_url = 'http://localhost:3000/home',
+                           credited_wallet_id="213995920")
+
+    paypal_payin.save()
+
+    return jsonify({'message': 'Paypal completed successfully'}), 200
 
 @api.route('/create_user', methods=['POST'])
 def create_user():
