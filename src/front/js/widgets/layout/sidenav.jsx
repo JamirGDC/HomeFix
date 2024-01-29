@@ -90,6 +90,9 @@ export function Sidenav({ brandImg, brandName, routes }) {
               if(name === "filter"){
                 return null;
               }
+              if(name === "test"){
+                return null;
+              }
               if (layout !== "auth") {
                 return (
                   <li key={name}>

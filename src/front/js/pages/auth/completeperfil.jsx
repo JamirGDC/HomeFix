@@ -34,16 +34,10 @@ export function CompletePerfil() {
   const register = async () => {
 
     try {
-      // Llama a completeperfil() y espera a que se complete
       await actions.completeperfil(first_name, last_name, address_line, city, region, postal_code, country, email);
 
-      // Si completeperfil() se completa sin errores, llama a createWallet()
-      // await createWallet();
-
-      // Después de crear la cartera, actualiza el usuario
       await update_userbe();
 
-      // Restablece los valores de los campos de entrada
       setFirst_Name('');
       setLastName('');
       setRegion('');
@@ -55,7 +49,6 @@ export function CompletePerfil() {
 
 
     } catch (error) {
-      // Maneja cualquier error que ocurra durante la ejecución de completeperfil()
       console.error('Error en register:', error);
     }
   }
@@ -64,9 +57,7 @@ export function CompletePerfil() {
     await actions.updateuserbe(userbe_id, mangoid, mangoidwallet, first_name, last_name, perfildone);
   }
 
-  // const createWallet = async () => {
-  //   await actions.crear_wallet(localStorage.idmango);
-  // }
+ 
 
 
   return (

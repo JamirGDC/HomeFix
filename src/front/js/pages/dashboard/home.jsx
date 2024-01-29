@@ -106,7 +106,6 @@ export function Home() {
       onMove,
       carouselState: { currentSlide, deviceType }
     } = rest;
-    // onMove means if dragging or swiping in progress.
     return <button onClick={() => onClick()}> <FiChevronRight className="text-black text-2xl" /></button>
   };
 

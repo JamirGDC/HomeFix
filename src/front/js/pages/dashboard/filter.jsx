@@ -81,7 +81,6 @@ export function Filter() {
   };
   const responsive = {
     superLargeDesktop: {
-      // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
       items: 8
     },
@@ -109,7 +108,6 @@ export function Filter() {
       onMove,
       carouselState: { currentSlide, deviceType }
     } = rest;
-    // onMove means if dragging or swiping in progress.
     return <button onClick={() => onClick()}> <FiChevronRight className="text-black text-2xl" /></button>
   };
 

@@ -38,37 +38,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 			categories: [],
 			datauserprofile: [],
 
-		}, // Add comma here
+		}, 
 		actions: {
-			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
 
 			getMessage: async () => {
 				try {
-					// fetching data from the backend
 					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
 					const data = await resp.json()
 					setStore({ message: data.message })
-					// don't forget to return something, that is how the async resolves
 					return data;
 				} catch (error) {
 					console.log("Error loading message from backend", error)
 				}
 			},
 			changeColor: (index, color) => {
-				//get the store
 				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
 				const demo = store.demo.map((elm, i) => {
 					if (i === index) elm.background = color;
 					return elm;
 				});
 
-				//reset the global store
 				setStore({ demo: demo });
 			},
 
@@ -197,26 +189,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			
 					if (!response.ok) {
-						// Si la respuesta no es exitosa, lanzar un error con el mensaje de error
 						const errorData = await response.json();
 						throw new Error(errorData.message || 'Error de inicio de sesión');
 					}
 			
-					// Si la respuesta es exitosa, obtener los datos de la respuesta
 					const data = await response.json();
-					// Actualizar el store con los datos recibidos
 					setStore({ ...store, token: data.token, email: data.email, userbe_id: data.userbe_id });
-					// Almacenar el token en el almacenamiento local
 					localStorage.setItem('token', data.token);
 					localStorage.setItem('userbe_id', data.userbe_id);
 					localStorage.setItem('email', data.email);
 					localStorage.setItem('name', data.name);
 					localStorage.setItem('img', data.img);
 					localStorage.setItem('banner', data.banner);
-					// Devolver los datos
 					return { status: response.status, data: data };
 				} catch (error) {
-					// Manejar errores de red o de otra índole
 					console.error('Error de inicio de sesión:', error);
 					throw error;
 				}
