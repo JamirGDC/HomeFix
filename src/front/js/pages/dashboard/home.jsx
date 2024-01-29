@@ -45,6 +45,9 @@ export function Home() {
   const { store, actions } = useContext(Context);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const [user_id, setUser_id] = useState('');
+
+
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -125,24 +128,23 @@ export function Home() {
         removeArrowOnDeviceType={['tablet', 'mobile']}
         className="m-0 p-0 rounded-xl"
         show={5}
-        
+
       >
-          {Categorycarddata.map(({ img, text }) => (
-            <CategoryCard
-              images_urls={img}
-              text={text}
-              
-            >
+        {Categorycarddata.map(({ img, text }) => (
+          <CategoryCard
+            images_urls={img}
+            text={text}
 
-            </CategoryCard>
+          >
 
-          ))}
+          </CategoryCard>
+
+        ))}
       </Carousel>
 
       <hr className="my-2 border-blue-gray-50" />
       <h2>Ultimos Productos</h2>
       <div className="mb-12 mt-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-5">
-
 
         {store.products.map((product) => (
           <StatisticsCard
@@ -152,6 +154,7 @@ export function Home() {
             product_description={product.description}
             product_price={product.price}
             product_seller={product.seller.email}
+            product_seller_id={product.seller.id}
           />
         ))}
 
@@ -165,25 +168,10 @@ export function Home() {
             })}
           />
         ))} */}
+
       </div>
-      <div className="mb-6 grid grid-cols-1 gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
-        {statisticsChartsData.map((props) => (
-          <StatisticsChart
-            key={props.title}
-            {...props}
-            footer={
-              <Typography
-                variant="small"
-                className="flex items-center font-normal text-blue-gray-600"
-              >
-                <ClockIcon strokeWidth={2} className="h-4 w-4 text-blue-gray-400" />
-                &nbsp;{props.footer}
-              </Typography>
-            }
-          />
-        ))}
-      </div>
-      <div className="mb-4 grid grid-cols-1 gap-6 xl:grid-cols-3">
+      {/* jamirrrrr@gmail.com */}
+      {/* <div className="mb-4 grid grid-cols-1 gap-6 xl:grid-cols-3">
         <Card className="overflow-hidden xl:col-span-2 border border-blue-gray-100 shadow-sm">
           <CardHeader
             floated={false}
@@ -365,7 +353,7 @@ export function Home() {
             )}
           </CardBody>
         </Card>
-      </div>
+      </div> */}
     </div>
   );
 }

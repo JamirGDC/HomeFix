@@ -12,7 +12,8 @@ class User_be(db.Model):
     province_id = db.Column(db.Integer, db.ForeignKey('province.id'))
     province = db.relationship('Province', backref='users')
     products = db.relationship('Product', backref='seller', lazy=True)
-
+    img = db.Column(db.String(120), nullable=True)
+    banner = db.Column(db.String(120), nullable=True)
     mangoid = db.Column(db.Integer, nullable=True)
     mangoidwallet = db.Column(db.Integer, nullable=True)
     nombre = db.Column(db.String(120), nullable=True)
@@ -27,6 +28,10 @@ class User_be(db.Model):
         return {
             "id": self.id,
             "email": self.email,
+            "img": self.img,
+            "banner": self.banner,
+            "name" : self.nombre,
+            "apellido" : self.apellido,
             "province": self.province.name if self.province else None,
         }
     

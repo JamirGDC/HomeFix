@@ -22,7 +22,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			username: "",
 			secret: "",
 			user: {
-				id: null,
+				id: "",
 				email: ""
 			},
 			products: [],
@@ -30,6 +30,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			productsbyuser: [],
 			email: "",
 			perfildone: false,
+			name: "",
+			img: "",
+			banner: "",
+			userbe_id: "",
+			datauser:[],
 
 		}, // Add comma here
 		actions: {
@@ -201,6 +206,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ ...store, token: data.token, email: data.email, userbe_id: data.userbe_id });
 					// Almacenar el token en el almacenamiento local
 					localStorage.setItem('token', data.token);
+					localStorage.setItem('userbe_id', data.userbe_id);
+					localStorage.setItem('email', data.email);
+					localStorage.setItem('name', data.name);
+					localStorage.setItem('img', data.img);
+					localStorage.setItem('banner', data.banner);
 					// Devolver los datos
 					return { status: response.status, data: data };
 				} catch (error) {
@@ -278,6 +288,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			getuser: async (userbe_id) => {
+				const store = getStore();
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/api/user/${userbe_id}`, {
+						method: 'GET',
+					});
+
+					const data = await response.json();
+					console.log(data);
+
+					setStore({ ...store, datauser: data });
+
+				}
+				catch (error) {
+					console.error("Error during signup:", error);
+				}
+			},
+
 			getAllProvinces: async () => {
 				const store = getStore();
 				try {
@@ -290,6 +318,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error("Error loading provinces from backend:", error);
 				}
 			},
+
+
+
 			// getUserProducts: async () => {
 			// 	const store = getStore();
 			// 	try {

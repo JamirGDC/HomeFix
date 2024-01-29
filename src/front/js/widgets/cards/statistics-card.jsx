@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState } from "react";
 
 import {
   Card,
@@ -13,8 +13,20 @@ import {
 import PropTypes from "prop-types";
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { Carousel } from 'react-responsive-carousel';
+import { Link, Navigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-export function StatisticsCard({ images_urls, key, title, product_description, product_price, product_seller }) {
+export function StatisticsCard({ images_urls, key, title, product_description, product_price, product_seller, product_seller_id }) {
+
+  const [user_id, setUserId] = useState('');
+  const navigate = useNavigate();
+
+
+  const setuser = () => {
+    setUserId(product_seller_id);
+    console.log(user_id);
+    navigate(`/dashboard/chathomefix/${product_seller_id}`);
+  }
   return (
     <Card className="max-w-72">
       <CardHeader shadow={true} floated={false} className="h-52 mt-3 mx-3">
@@ -58,13 +70,19 @@ export function StatisticsCard({ images_urls, key, title, product_description, p
         </Typography>
       </CardBody>
       <CardFooter className="pt-0 px-3 flex flex-row gap-3">
-        <Button
-          ripple={false}
-          fullWidth={true}
-          className="bg-[#2A2A2A] text-white shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100 w-[70%]"
-        >
-          Contactar
-        </Button>
+
+
+          <Button
+            onClick={setuser}
+            ripple={false}
+            fullWidth={true}
+            className="bg-[#2A2A2A] text-white shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100 w-[70%]"
+          >
+            Contactar
+          </Button>
+        
+
+
         <Button
           ripple={false}
           fullWidth={true}

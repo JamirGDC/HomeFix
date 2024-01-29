@@ -43,8 +43,7 @@ export function SignIn() {
   const [successMessage, setSuccessMessage] = useState('');
 
   const login = async () => {
-    // Verificar que el email y la contraseña no estén vacíos
-    console.log(email, password);
+
 
     try {
       // Realizar la solicitud de inicio de sesión

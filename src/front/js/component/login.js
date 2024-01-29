@@ -12,7 +12,7 @@ const Login = () => {
     const navigate = useNavigate();
 
     const login = async () => {
-        await actions.setToken(email, password);
+        await actions.clearToken(email, password);
         setEmail('');
         setPassword('');
         navigate("/home");

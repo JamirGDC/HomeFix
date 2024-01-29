@@ -12,7 +12,7 @@ import {
     PaperAirplaneIcon,
   } from "@heroicons/react/24/solid";
   import { Home, Profile, Chathomefix, Tables, Notifications } from "./pages/dashboard";
-  import { SignIn, SignUp } from "./pages/auth";
+  import { SignIn, SignUp, CompletePerfil } from "./pages/auth";
   
   const icon = {
     className: "w-5 h-5 text-inherit",
@@ -55,7 +55,7 @@ import {
         {
           icon: <RectangleStackIcon {...icon} />,
           name: "chat",
-          path: "/chathomefix",
+          path: "/chathomefix/:user_id",
           element: <Chathomefix />,
         },
       ],
@@ -75,6 +75,12 @@ import {
           name: "sign up",
           path: "/sign-up",
           element: <SignUp />,
+        },
+        {
+          icon: <RectangleStackIcon {...icon} />,
+          name: "complete perfil",
+          path: "/completeperfil",
+          element: <CompletePerfil />,
         },
         
       ],

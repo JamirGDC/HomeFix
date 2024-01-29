@@ -246,13 +246,33 @@ def create_token():
     # Query your database for username and password
     user = User_be.query.filter_by(email=email, password=password).first()
 
+    print(user)
+
     if user is None:
         # The user was not found on the database
         return jsonify({"msg": "Bad email or password"}), 401
     
     # Create a new token with the user id inside
     access_token = create_access_token(identity=user.id, expires_delta=timedelta(days=1))
-    return jsonify({ "token": access_token, "userbe_id": user.id, email: user.email }), 200
+    return jsonify({ "token": access_token, "userbe_id": user.id, "email": user.email, "img" : user.img, "banner" : user.banner, "name" : user.nombre }), 200
+
+
+@api.route("/user/<int:userbe_id>", methods=["GET"])
+def get_user_by_id(userbe_id):
+    try:
+        user = User_be.query.get(userbe_id)
+
+        if not user:
+            return jsonify({"message": "User not found"}), 404
+
+        serialized_user = user.serialize()
+
+        return jsonify(serialized_user), 200
+
+    except Exception as e:
+        return jsonify({"message": str(e)}), 500
+
+
 
 @api.route("/protected", methods=["GET"])
 @jwt_required()

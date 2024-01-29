@@ -57,7 +57,7 @@ export function Configurator() {
 
   React.useEffect(() => {
     const stars = fetch(
-      "https://api.github.com/repos/creativetimofficial/material-tailwind-dashboard-react"
+      "https://api.github.com/repos/JamirGDC/ProyectoFinal4Geeks"
     )
       .then((response) => response.json())
       .then((data) => setStars(formatNumber(data.stargazers_count, 1)));
@@ -72,10 +72,10 @@ export function Configurator() {
       <div className="flex items-start justify-between px-6 pt-8 pb-6">
         <div>
           <Typography variant="h5" color="blue-gray">
-            Dashboard Configurator
+            HomeFix Configurator
           </Typography>
           <Typography className="font-normal text-blue-gray-600">
-            See our dashboard options.
+            Prueba el HomeFix Configurator
           </Typography>
         </div>
         <IconButton
@@ -89,7 +89,7 @@ export function Configurator() {
       <div className="py-4 px-6">
         <div className="mb-12">
           <Typography variant="h6" color="blue-gray">
-            Sidenav Colors
+            Navegacion Lateral
           </Typography>
           <div className="mt-3 flex items-center gap-2">
             {Object.keys(sidenavColors).map((color) => (
@@ -107,10 +107,10 @@ export function Configurator() {
         </div>
         <div className="mb-12">
           <Typography variant="h6" color="blue-gray">
-            Sidenav Types
+            Tipos de Navegacion Lateral
           </Typography>
           <Typography variant="small" color="gray">
-            Choose between 3 different sidenav types.
+            Escoge entre los 3 tipos
           </Typography>
           <div className="mt-3 flex items-center gap-2">
             <Button
@@ -137,7 +137,7 @@ export function Configurator() {
           <hr />
           <div className="flex items-center justify-between py-5">
             <Typography variant="h6" color="blue-gray">
-              Navbar Fixed
+              Barra de Navegacion Fija
             </Typography>
             <Switch
               id="navbar-fixed"
@@ -146,7 +146,7 @@ export function Configurator() {
             />
           </div>
           <hr />
-          <div className="my-8 flex flex-col gap-4">
+          {/* <div className="my-8 flex flex-col gap-4">
             <a
               href="https://www.creative-tim.com/product/material-tailwind-dashboard-react?rel=mtdr"
               target="_black"
@@ -171,10 +171,10 @@ export function Configurator() {
                 Material Tailwind PRO
               </Button>
             </a>
-          </div>
+          </div> */}
           <a
             className="mx-auto flex items-center justify-center gap-2"
-            href="https://github.com/creativetimofficial/material-tailwind-dashboard-react"
+            href="https://github.com/JamirGDC/ProyectoFinal4Geeks"
             target="_blank"
             rel="noreferrer"
           >
@@ -208,7 +208,7 @@ export function Configurator() {
         </div>
         <div className="text-center">
           <Typography variant="h6" color="blue-gray">
-            Thank you for sharing ❤️
+            Gracias por Compartir❤️
           </Typography>
           <div className="mt-4 flex justify-center gap-2">
             <Button
