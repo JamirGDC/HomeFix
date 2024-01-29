@@ -28,7 +28,8 @@ export function SignUp() {
   const register = async () => {
 
     try {
-      await actions.signup(email, password);
+      const response = await actions.signup(email, password);
+
 
       if (response && response.status === 200) {
         // Autenticación exitosa, redirigir al home
