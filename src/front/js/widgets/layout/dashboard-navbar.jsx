@@ -87,9 +87,9 @@ export function DashboardNavbar() {
           </Typography>
         </div>
         <div className="flex items-center">
-          <div className="mr-auto md:mr-4 md:w-56">
+          {/* <div className="mr-auto md:mr-4 md:w-56">
             <Input label="Search" />
-          </div>
+          </div> */}
           <IconButton
             variant="text"
             color="blue-gray"
@@ -121,10 +121,10 @@ export function DashboardNavbar() {
 
 
           {isTokenPresent && (
-            <Link className="pr-4">
+            <Link to="/dashboard/notifications" className="pr-4">
               <Button variant="outlined">
-              <i className="fas fa-plus pr-1" />
-                  Añadir Publicacion
+                <i className="fas fa-plus pr-1" />
+                Añadir Publicacion
               </Button>
             </Link>
           )}
@@ -185,7 +185,7 @@ export function DashboardNavbar() {
                     Edit Profile
                   </Typography>
                 </MenuItem> */}
-                <Link to="/dashboard/chathomefix">
+                <Link to="/dashboard/chathomefix/:user_id">
                   <MenuItem className="flex items-center gap-2">
 
 

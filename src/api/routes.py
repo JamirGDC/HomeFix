@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User_be, Product, Province
+from api.models import db, User_be, Product, Province, Category
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
@@ -297,15 +297,18 @@ def create_product():
         description = data.get("description")
         price = data.get("price")
         images_urls = json.dumps(data.get("images_urls"))
-        province_name = data.get("province")
-        
+        province_name = int(data.get("province"))
+        category_ids = data.get("categories")
+        categories = Category.query.filter(Category.id.in_(category_ids)).all()
+
         new_product = Product(
             name=name,
             description=description,
             price=price,
             seller=user, 
             images_urls=images_urls,
-            province=province_name
+            province_id=province_name,
+            categories=categories
 
 
         )
@@ -384,3 +387,24 @@ def get_user_products():
 
     except Exception as e:
         return jsonify({"message": str(e)}), 500
+    
+@api.route('/categories', methods=['GET'])
+def get_categories():
+    categories = Category.query.all()
+    serialized_categories = [category.serialize() for category in categories]
+    return jsonify(serialized_categories)
+
+@api.route('/findcategory/<int:categoria_id>', methods=['GET'])
+def obtener_productos_por_categoria(categoria_id):
+    categoria = Category.query.get(categoria_id)
+
+    if not categoria:
+        return jsonify({"mensaje": "Categoría no encontrada"}), 404
+
+    productos = categoria.products
+    productos_serializados = [producto.serialize() for producto in productos]
+    print(productos_serializados)
+
+    return jsonify(productos_serializados)
+
+    

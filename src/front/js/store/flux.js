@@ -35,6 +35,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			banner: "",
 			userbe_id: "",
 			datauser:[],
+			categories: [],
+			datauserprofile: [],
 
 		}, // Add comma here
 		actions: {
@@ -255,7 +257,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error("Error during signup:", error);
 				}
 			},
-			createProduct: async (name, description, price, images_urls, province) => {
+			createProduct: async (name, description, price, images_urls, province, categories) => {
 				const store = getStore();
 				try {
 					const response = await fetch(`${process.env.BACKEND_URL}/api/products`, {
@@ -264,7 +266,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							'Content-Type': 'application/json',
 							'Authorization': `Bearer ${localStorage.token}`
 						},
-						body: JSON.stringify({ name, description, price, images_urls, province })
+						body: JSON.stringify({ name, description, price, images_urls, province, categories  })
 					});
 					const data = await response.json();
 
@@ -306,6 +308,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			getuserprofile: async (userbe_id) => {
+				const store = getStore();
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/api/user/${userbe_id}`, {
+						method: 'GET',
+					});
+
+					const data = await response.json();
+					console.log(data);
+
+					setStore({ ...store, datauserprofile: data });
+
+				}
+				catch (error) {
+					console.error("Error during signup:", error);
+				}
+			},
+
 			getAllProvinces: async () => {
 				const store = getStore();
 				try {
@@ -316,6 +336,38 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				} catch (error) {
 					console.error("Error loading provinces from backend:", error);
+				}
+			},
+
+			getallcategories: async () => {
+				const store = getStore();
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/api/categories`);
+					const data = await response.json();
+
+					setStore({ ...store, categories: data });
+					localStorage.setItem('categories', JSON.stringify(data));
+
+				} catch (error) {
+					console.error("Error loading categories from backend:", error);
+				}
+			},
+
+			getcategory: async (category_id) => {
+				const store = getStore();
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/api/findcategory/${category_id}`, {
+						method: 'GET',
+					});
+
+					const data = await response.json();
+					console.log(data);
+
+					setStore({ ...store, category: data });
+
+				}
+				catch (error) {
+					console.error("Error during signup:", error);
 				}
 			},
 

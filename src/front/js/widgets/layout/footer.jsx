@@ -43,15 +43,15 @@ export function Footer({ brandName, brandLink, routes }) {
 }
 
 Footer.defaultProps = {
-  brandName: "Los Latin Kings",
-  brandLink: "https://www.creative-tim.com",
+  brandName: "Los Latin  K...",
+  brandLink: "https://github.com/JamirGDC/ProyectoFinal4Geeks",
   routes: [
-    { name: "Jamir G.", path: "https://www.creative-tim.com" },
-    { name: "Husseim V.", path: "https://www.creative-tim.com" },
-    { name: "Nilson M.", path: "https://www.creative-tim.com" },
-    { name: "Acerca de", path: "https://www.creative-tim.com/presentation" },
-    { name: "Preguntas", path: "https://www.creative-tim.com/blog" },
-    { name: "Contacto", path: "https://www.creative-tim.com/license" },
+    { name: "Jamir G.", path: "https://www.linkedin.com/in/jamirgdc/" },
+    { name: "Husseim V.", path: "https://www.linkedin.com/in/husseim-vargas-a14b16146/" },
+    { name: "Nilson M.", path: "https://linkedin.com/in/nilson-marenco-285bba290/" },
+    // { name: "Acerca de", path: "https://www.creative-tim.com/presentation" },
+    // { name: "Preguntas", path: "https://www.creative-tim.com/blog" },
+    // { name: "Contacto", path: "https://www.creative-tim.com/license" },
   ],
 };
 

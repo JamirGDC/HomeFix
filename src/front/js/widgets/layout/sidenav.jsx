@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from "prop-types";
 import { Link, NavLink } from "react-router-dom";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import img from "@img/icono.svg";
 import {
   Avatar,
   Button,
@@ -19,6 +20,21 @@ export function Sidenav({ brandImg, brandName, routes }) {
     white: "bg-white shadow-sm",
     transparent: "bg-transparent",
   };
+  // Función para verificar si el perfil debe mostrarse
+  const shouldShowProfile = () => {
+    // Aquí debes verificar si hay un token presente
+    // Puedes utilizar el hook de autenticación o cualquier otro método que tengas en tu aplicación
+    const token = localStorage.getItem("token"); // Suponiendo que el token se almacena en localStorage
+    return !!token; // Devuelve true si hay un token, false si no
+  };
+
+  // Función para verificar si el chat debe mostrarse
+  const shouldShowChat = () => {
+    // Aquí también puedes aplicar tu lógica para verificar si el chat debe mostrarse
+    // Puedes utilizar el mismo método de autenticación o cualquier otro método que prefieras
+    const token = localStorage.getItem("token"); // Suponiendo que el token se almacena en localStorage
+    return !!token; // Devuelve true si hay un token, false si no
+  };
 
   return (
     <aside
@@ -26,9 +42,7 @@ export function Sidenav({ brandImg, brandName, routes }) {
         openSidenav ? "translate-x-0" : "-translate-x-80"
       } fixed inset-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0 border border-blue-gray-100 `}
     >
-      <div
-        className={`relative`}
-      >
+      <div className={`relative`}>
         <Link to="/" className="py-6 px-8 text-center">
           <Typography
             variant="h6"
@@ -49,7 +63,7 @@ export function Sidenav({ brandImg, brandName, routes }) {
         </IconButton>
       </div>
       <div className="m-4">
-        {routes.slice(0,1).map(({ layout, title, pages }, key) => (
+        {routes.map(({ layout, title, pages }, key) => (
           <ul key={key} className="mb-4 flex flex-col gap-1">
             {title && (
               <li className="mx-3.5 mt-4 mb-2">
@@ -62,34 +76,52 @@ export function Sidenav({ brandImg, brandName, routes }) {
                 </Typography>
               </li>
             )}
-            {pages.slice(0,).map(({ icon, name, path }) => (
-              <li key={name}>
-                <NavLink to={`/${layout}${path}`}>
-                  {({ isActive }) => (
-                    <Button
-                      variant={isActive ? "gradient" : "text"}
-                      color={
-                        isActive
-                          ? sidenavColor
-                          : sidenavType === "dark"
-                          ? "white"
-                          : "blue-gray"
-                      }
-                      className="flex items-center gap-4 px-4 capitalize"
-                      fullWidth
-                    >
-                      {icon}
-                      <Typography
-                        color="inherit"
-                        className="font-medium capitalize"
-                      >
-                        {name}
-                      </Typography>
-                    </Button>
-                  )}
-                </NavLink>
-              </li>
-            ))}
+            {pages.map(({ icon, name, path }) => {
+              // Verificar si la página es una página de autenticación
+              if ((name === "Perfil" && !shouldShowProfile()) || (name === "chat" && !shouldShowChat())) {
+                return null;
+              }
+              if(name === "PerfilUser"){
+                return null;
+              }
+              if(name === "notifications"){
+                return null;
+              }
+              if(name === "filter"){
+                return null;
+              }
+              if (layout !== "auth") {
+                return (
+                  <li key={name}>
+                    <NavLink to={`/${layout}${path}`}>
+                      {({ isActive }) => (
+                        <Button
+                          variant={isActive ? "gradient" : "text"}
+                          color={
+                            isActive
+                              ? sidenavColor
+                              : sidenavType === "dark"
+                              ? "white"
+                              : "blue-gray"
+                          }
+                          className="flex items-center gap-4 px-4 capitalize"
+                          fullWidth
+                        >
+                          {icon}
+                          <Typography
+                            color="inherit"
+                            className="font-medium capitalize"
+                          >
+                            {name}
+                          </Typography>
+                        </Button>
+                      )}
+                    </NavLink>
+                  </li>
+                );
+              }
+              return null; // Omitir completamente las páginas de autenticación
+            })}
           </ul>
         ))}
       </div>
@@ -98,7 +130,7 @@ export function Sidenav({ brandImg, brandName, routes }) {
 }
 
 Sidenav.defaultProps = {
-  brandImg: "./logo.svg",
+  brandImg: {img},
   brandName: "HomeFix",
 };
 

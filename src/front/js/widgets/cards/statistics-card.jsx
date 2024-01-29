@@ -22,6 +22,11 @@ export function StatisticsCard({ images_urls, key, title, product_description, p
   const navigate = useNavigate();
 
 
+  const viewProfile = () => {
+    setUserId(product_seller_id);
+    navigate(`/dashboard/profileuser/${product_seller_id}`);
+  }
+
   const setuser = () => {
     setUserId(product_seller_id);
     console.log(user_id);
@@ -86,6 +91,7 @@ export function StatisticsCard({ images_urls, key, title, product_description, p
         <Button
           ripple={false}
           fullWidth={true}
+          onClick={viewProfile}
           className="bg-blue-gray-900/10 text-blue-gray-900 h-full shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100 w-[30%] p-0 flex flex-row justify-center content-center items-center"
         >
           <MagnifyingGlassIcon className="w-5 h-5 text-blue-gray-900" />

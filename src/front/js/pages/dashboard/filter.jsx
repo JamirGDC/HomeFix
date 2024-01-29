@@ -13,9 +13,9 @@ import {
   Avatar,
   Tooltip,
   Progress,
-  Spinner,
 } from "@material-tailwind/react";
 
+import { useParams } from "react-router-dom";
 
 import Carousel from 'react-multi-carousel';
 import "react-multi-carousel/lib/styles.css";
@@ -41,20 +41,23 @@ import { Context } from '../../store/appContext';
 import { useNavigate } from "react-router-dom";
 import banner from '@img/Bannerhomefix.png';
 
-export function Home() {
+
+
+export function Filter() {
 
   const { store, actions } = useContext(Context);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const [user_id, setUser_id] = useState('');
 
+  const { category_id } = useParams();
 
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         console.log("Fetching products...");
-        await actions.getAllProducts();
+        await actions.getcategory(category_id);
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
@@ -66,7 +69,7 @@ export function Home() {
   }, []);
 
   if (loading) {
-    return <Spinner />;
+    return <p>Cargando productos...</p>;
   }
 
   const settings = {
@@ -113,12 +116,6 @@ export function Home() {
   return (
     <div className="mt-12">
 
-      <div className="mb-12 gap-y-10 gap-x-6">
-        <img className=' w-full rounded-lg' src={banner} alt="" />
-      </div>
-
-
-
       <Carousel
         customRightArrow={<CustomRightArrow />}
         responsive={responsive}
@@ -127,15 +124,14 @@ export function Home() {
         arrows={false}
         autoPlaySpeed={3000}
         removeArrowOnDeviceType={['tablet', 'mobile']}
-        className="m-0 p-0 rounded-xl"
+        className="mb-[3em] p-0 rounded-xl"
         show={5}
 
       >
-        {Categorycarddata.map(({ img, text, id }) => (
+        {Categorycarddata.map(({ img, text }) => (
           <CategoryCard
             images_urls={img}
             text={text}
-            id={id}
 
           >
 
@@ -145,10 +141,20 @@ export function Home() {
       </Carousel>
 
       <hr className="my-2 border-blue-gray-50" />
-      <h2>Ultimos Productos</h2>
+      {store.category.map((named) => (
+        <div key={named.id}>
+          {named.categories.map((category) => (
+            <h2 
+            className='text-2xl font-bold text-blue-gray-700 mb-4'
+            key={category.id}>
+              {category.name}
+            </h2>
+          ))}
+        </div>
+      ))}
       <div className="mb-12 mt-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-5">
 
-        {store.products.map((product) => (
+        {store.category.map((product) => (
           <StatisticsCard
             key={product.id}
             images_urls={product.images_urls}
@@ -360,4 +366,4 @@ export function Home() {
   );
 }
 
-export default Home;
+export default Filter;

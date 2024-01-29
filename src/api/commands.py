@@ -1,6 +1,6 @@
 
 import click
-from api.models import db, User_be, Province
+from api.models import db, User_be, Province, Category
 
 
 """
@@ -36,6 +36,7 @@ def setup_commands(app):
 
     @app.cli.command("create-provinces")
     def create_provinces():
+
         # Lista de provincias de España
         Province.query.delete()
 
@@ -56,6 +57,28 @@ def setup_commands(app):
 
         db.session.commit()
         print("All provinces created")
+
+    @app.cli.command("create-categories")
+    def create_categories():
+        with app.app_context():
+        # Lista de categorías
+            Category.query.delete()  # Elimina todas las categorías existentes para empezar desde cero
+
+        category_names = [
+            "Albañileria", "Carpinteria", "Cerrajeria", "Electricidad",
+            "Fontaneria", "Jardineria", "Limpieza", "Manitas",
+            "Mudanzas", "Pintura", "Reformas", "Refrigeracion"
+        ]
+
+        print("Creando categorías")
+        for category_name in category_names:
+            category = Category(name=category_name)
+            db.session.add(category)
+
+        db.session.commit()
+        print("Todas las categorías han sido creadas exitosamente")
+
+
 
 
     

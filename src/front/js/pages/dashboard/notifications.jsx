@@ -37,6 +37,7 @@ export function Notifications() {
     price: '',
     imageFiles: [],
     province: '',
+    category: [],
   });
 
   useEffect(() => {
@@ -52,8 +53,34 @@ export function Notifications() {
     fetchProvinces();
   }, []);
 
+  useEffect(() => {
+    const getcategories = async () => {
+      try {
+        console.log("Fetching products...");
+        await actions.getallcategories();
+        console.log("Categories:", store.categories)
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    getcategories();
+  }, []);
+
   const handleInputChange = e => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    if (name === 'category') {
+      // Si la categoría es un array, agrega o elimina la selección actual
+      setFormData(prevState => ({
+        ...prevState,
+        [name]: prevState[name].includes(value)
+          ? prevState[name].filter(item => item !== value)
+          : [...prevState[name], value],
+      }));
+    } else {
+      // Si no es una categoría, actualiza normalmente
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const handleImageUpload = async e => {
@@ -92,13 +119,13 @@ export function Notifications() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const { name, description, price, imageFiles } = formData;
+    const { name, description, price, imageFiles, province, category } = formData;
 
     // Llama a la acción para crear una nueva publicación con las URLs de las imágenes
-    actions.createProduct(name, description, parseFloat(price), imageFiles);
+    actions.createProduct(name, description, parseFloat(price), imageFiles, province, category);
 
     // Limpia el formulario después de la creación
-    setFormData({ name: '', description: '', price: '', imageFiles: [] });
+    setFormData({ name: '', description: '', price: '', imageFiles: [], province: '', category: []});
   };
 
 
@@ -119,7 +146,7 @@ export function Notifications() {
   const alerts = ["gray", "green", "orange", "red"];
 
   return (
-    <div className="mx-auto my-20 flex max-w-screen-lg flex-col gap-8">
+    <div className=" flex max-w-screen-lg flex-col gap-8 bg-white p-4 rounded-xl mt-[4rem]">
       <Card color="transparent" shadow={false}>
         <Typography variant="h4" color="blue-gray">
           Crear una Nueva publicacion
@@ -174,7 +201,7 @@ export function Notifications() {
               }}
             />
             <Typography variant="h6" color="blue-gray" className="-mb-3">
-              ¿En que provincia te encuentras?
+              Selecciona una categoria
             </Typography>
 
             {/* <Select
@@ -194,22 +221,44 @@ export function Notifications() {
 
 
 
-            <div className="w-72">
+            <div className="min-w-[200px]">
               <select
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                name="province"
-                value={formData.province}
+                className="shadow appearance-none border min-w-[200px] w-full rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                name="category"
+                value={formData.category}
                 onChange={handleInputChange}
                 required
               >
-                <option value="" disabled>Seleccione una provincia</option>
-                {Array.isArray(store.provinces) && store.provinces.map((province) => (
-                  <option key={province.id} value={province.name}>{province.name}</option>
+                <option value="" disabled>Seleccione una categoria</option>
+                {Array.isArray(store.categories) && store.categories.map((category) => (
+                  <option key={category.id} value={category.id}>{category.name}</option>
                 ))}
 
 
               </select>
             </div>
+
+            <Typography variant="h6" color="blue-gray" className="-mb-3">
+              ¿En que provincia te encuentras?
+            </Typography>
+
+            <div className="min-w-[200px]">
+              <select
+                className="shadow appearance-none border rounded min-w-[200px] w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                name="province"
+                value={formData.province}
+                onChange={handleInputChange}
+                required
+              >
+                <option value={formData.category} >Seleccione una provincia</option>
+                {Array.isArray(store.provinces) && store.provinces.map((province) => (
+                  <option key={province.id} value={province.id}>{province.name}</option>
+                ))}
+
+
+              </select>
+            </div>
+         
 
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">

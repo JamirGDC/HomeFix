@@ -35,6 +35,27 @@ class User_be(db.Model):
             "province": self.province.name if self.province else None,
         }
     
+class Category(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), nullable=False, unique=True)
+    description = db.Column(db.Text, nullable=True)
+
+    def __repr__(self):
+        return f'<Category {self.name}>'
+
+    def serialize(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description
+        }
+
+
+products_categories = db.Table('products_categories',
+    db.Column('product_id', db.Integer, db.ForeignKey('product.id'), primary_key=True),
+    db.Column('category_id', db.Integer, db.ForeignKey('category.id'), primary_key=True)
+)
+    
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
@@ -43,6 +64,7 @@ class Product(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user_be.id'), nullable=False)
     province_id = db.Column(db.Integer, db.ForeignKey('province.id'))
     province = db.relationship('Province', back_populates='products')
+    categories = db.relationship('Category', secondary=products_categories, backref='products')
     images_urls = db.Column(db.String(2000))
 
     def serialize(self):
@@ -55,6 +77,7 @@ class Product(db.Model):
             "price": self.price,
             "seller": self.seller.serialize(),
             "province": self.province.name if self.province else None,
+            "categories": [category.serialize() for category in self.categories],
             "images_urls": images_urls,
         }
 
