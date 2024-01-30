@@ -367,6 +367,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(data)
 				setStore({...store, userProducts: data })
 				console.log(store.userProducts)
+			},
+
+			deleteProduct: async (product_id) => {
+				try {
+					const token = localStorage.getItem('token');
+					const response = await fetch(`${process.env.BACKEND_URL}/api/deleteproduct/${product_id}`, {
+						method: 'DELETE',
+						headers: {
+							'Authorization': `Bearer ${token}`,
+						}
+					});
+					if (!response.ok) {
+						throw new Error('Failed to delete product');
+					}
+					
+				} catch (error) {
+					console.error('Error deleting product:', error);
+				}
 			}
 
 

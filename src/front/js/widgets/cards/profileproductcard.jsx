@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { Context } from '../../store/appContext';
 
 import {
   Card,
@@ -12,19 +13,20 @@ import {
 
 import PropTypes from "prop-types";
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { TrashIcon } from '@heroicons/react/24/outline';
 import { Carousel } from 'react-responsive-carousel';
 import { Link, Navigate } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+import { accelerate } from "@cloudinary/url-gen/actions/effect";
 
-export function StatisticsCard({ images_urls, key, title, product_description, product_price, product_seller, product_seller_id }) {
-
+export function Profileproductcard({ images_urls, key, title, product_description, product_price, product_seller, product_seller_id, product_id }) {
+  const { store, actions } = useContext(Context);
   const [user_id, setUserId] = useState('');
   const navigate = useNavigate();
 
 
-  const viewProfile = () => {
-    setUserId(product_seller_id);
-    navigate(`/dashboard/profileuser/${product_seller_id}`);
+  const viewProfile = async () => {
+    await actions.deleteProduct(product_id);
   }
 
   const setuser = () => {
@@ -75,7 +77,7 @@ export function StatisticsCard({ images_urls, key, title, product_description, p
             {product_seller}
           </Typography>
           <div>
-            
+
           </div>
         </div>
       </CardBody>
@@ -88,7 +90,7 @@ export function StatisticsCard({ images_urls, key, title, product_description, p
           fullWidth={true}
           className="bg-[#2A2A2A] text-white shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100 w-[70%]"
         >
-          Contactar
+          Editar
         </Button>
 
 
@@ -97,21 +99,21 @@ export function StatisticsCard({ images_urls, key, title, product_description, p
           ripple={false}
           fullWidth={true}
           onClick={viewProfile}
-          className="bg-blue-gray-900/10 text-blue-gray-900 h-full shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100 w-[30%] p-0 flex flex-row justify-center content-center items-center"
+          className="bg-red-500 text-blue-gray-900 h-full shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100 w-[30%] p-0 flex flex-row justify-center content-center items-center"
         >
-          <MagnifyingGlassIcon className="w-5 h-5 text-blue-gray-900" />
+          <TrashIcon className="w-5 h-5 text-white" />
         </Button>
       </CardFooter>
     </Card>
   );
 }
 
-StatisticsCard.defaultProps = {
+Profileproductcard.defaultProps = {
   color: "blue",
   footer: null,
 };
 
-StatisticsCard.propTypes = {
+Profileproductcard.propTypes = {
   color: PropTypes.oneOf([
     "white",
     "blue-gray",
@@ -141,6 +143,6 @@ StatisticsCard.propTypes = {
   footer: PropTypes.node,
 };
 
-StatisticsCard.displayName = "/src/widgets/cards/statistics-card.jsx";
+Profileproductcard.displayName = "/src/widgets/cards/profileproductcard.jsx";
 
-export default StatisticsCard;
+export default Profileproductcard;

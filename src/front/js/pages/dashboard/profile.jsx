@@ -24,7 +24,7 @@ import {
   PencilIcon,
 } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
-import { ProfileInfoCard, MessageCard, StatisticsCard } from "../../widgets/cards";
+import { ProfileInfoCard, MessageCard, Profileproductcard } from "../../widgets/cards";
 import { platformSettingsData, conversationsData, projectsData } from "../../data";
 
 
@@ -131,7 +131,7 @@ export function Profile() {
           <div className="mb-12 mt-12 grid gap-y-10 gap-x-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 
             {store.userProducts.map((product) => (
-              <StatisticsCard
+              <Profileproductcard
                 key={product.id}
                 images_urls={product.images_urls}
                 title={product.name}
@@ -139,6 +139,7 @@ export function Profile() {
                 product_price={product.price}
                 product_seller={product.seller.email}
                 product_seller_id={product.seller.id}
+                product_id={product.id}
               />
             ))}
 

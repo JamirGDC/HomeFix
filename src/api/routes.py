@@ -15,7 +15,7 @@ import os, requests
 
 api = Blueprint('api', __name__)
 
-CORS(api, origins=["http://localhost:3000", "http://localhost:3001","http://localhost:3001/api/todoist/auth", "http://localhost:3001/api/todoist/callback","http://127.0.0.1:3000/home?"])
+
 
 load_dotenv()
 
@@ -381,4 +381,28 @@ def obtener_productos_por_categoria(categoria_id):
 
     return jsonify(productos_serializados)
 
+
+@api.route("/deteleproduct/<int:product_id>", methods=["DELETE"])
+@jwt_required()
+def delete_product(product_id):
+    try:
+        current_user_id = get_jwt_identity()
+        user = User_be.query.filter_by(id=current_user_id).first()
+
+        if not user:
+            return jsonify({"message": "User not found"}), 404
+
+        # product = Product.query.filter_by(id=product_id, seller_id=user.id).first()
+        product = Product.query.filter_by(id=product_id).first()
+
+        if not product:
+            return jsonify({"message": "Product not found or unauthorized"}), 404
+
+        db.session.delete(product)
+        db.session.commit()
+
+        return jsonify({"message": "Product deleted successfully"}), 200
+
+    except Exception as e:
+        return jsonify({"message": str(e)}), 500
     
