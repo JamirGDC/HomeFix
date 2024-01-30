@@ -345,12 +345,10 @@ def signupchat():
     )
     return response.json()
 
-@api.route("/productsbyuser", methods=["GET"])
-@jwt_required()
-def get_user_products():
+@api.route("/productsbyuser/<string:emailincoming>", methods=["GET"])
+def get_user_products(emailincoming):
     try:
-        current_user_email = get_jwt_identity()
-        user = User_be.query.filter_by(email=current_user_email).first()
+        user = User_be.query.filter_by(email=emailincoming).first()
 
         if not user:
             return jsonify({"message": "User not found"}), 404

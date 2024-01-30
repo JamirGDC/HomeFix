@@ -356,6 +356,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error("Error during signup:", error);
 				}
 			},
+			getProductsByUser: async () => {
+				const store = getStore();
+				const response = await fetch(`${process.env.BACKEND_URL}/api/productsbyuser/${store.user.email}`, {
+					method: 'GET',
+				})
+				const data = await response.json()
+				console.log(data)
+				setStore({...store, userProducts: data })
+				console.log(store.userProducts)
+			}
 
 
 
