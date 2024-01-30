@@ -18,19 +18,24 @@ import {
   Select,
   Option,
   Form,
+  Popover,
+  PopoverContent,
+  PopoverHandler,
 } from "@material-tailwind/react";
 import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import { Navigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 
-const submit = () => {
-  alert("Publicación creada con exito");
-}
+
 
 
 export function Notifications() {
+  const [showSuccessPopover, setShowSuccessPopover] = useState(false); // Estado para controlar la visibilidad del popover de éxito
 
   const { store, actions } = useContext(Context);
+
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -39,6 +44,7 @@ export function Notifications() {
     province: '',
     category: [],
   });
+
 
   useEffect(() => {
     const fetchProvinces = async () => {
@@ -52,6 +58,19 @@ export function Notifications() {
 
     fetchProvinces();
   }, []);
+
+
+
+
+  useEffect(() => {
+    if (showSuccessPopover) {
+      setTimeout(() => {
+        setShowSuccessPopover(false);
+        navigate("/dashboard/profile");
+      }, 3000); // Puedes ajustar el tiempo según tus necesidades
+    }
+  }, [showSuccessPopover]);
+
 
   useEffect(() => {
     const getcategories = async () => {
@@ -123,9 +142,9 @@ export function Notifications() {
 
     // Llama a la acción para crear una nueva publicación con las URLs de las imágenes
     actions.createProduct(name, description, parseFloat(price), imageFiles, province, category);
-
+    setShowSuccessPopover(true);
     // Limpia el formulario después de la creación
-    setFormData({ name: '', description: '', price: '', imageFiles: [], province: '', category: []});
+    setFormData({ name: '', description: '', price: '', imageFiles: [], province: '', category: [] });
   };
 
 
@@ -258,7 +277,7 @@ export function Notifications() {
 
               </select>
             </div>
-         
+
 
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -283,9 +302,38 @@ export function Notifications() {
 
           </div>
 
-          <Button className="mt-6" onClick={submit} type="submit" fullWidth>
-            Crear Publicación
-          </Button>
+          <Popover
+            animate={{
+              mount: { scale: 1, y: 0 },
+              unmount: { scale: 0, y: 25 },
+            }}>
+            <PopoverHandler type="submit">
+              <Button className="mt-6" fullWidth>
+                Crear Publicación
+              </Button>
+            </PopoverHandler>
+            {showSuccessPopover && (
+              <PopoverContent>
+                Tu publicación se ha creado con éxito
+              </PopoverContent>
+            )}
+          </Popover>
+
+          {/* <Popover
+            animate={{
+              mount: { scale: 1, y: 0 },
+              unmount: { scale: 0, y: 25 },
+            }}
+          >
+            <PopoverHandler>
+              <Button className="mt-6" type="submit" fullWidth>
+                Crear Publicación
+              </Button>
+            </PopoverHandler>
+            <PopoverContent>
+              This is a very beautiful popover, show some love.
+            </PopoverContent>
+          </Popover> */}
 
         </form>
       </Card>

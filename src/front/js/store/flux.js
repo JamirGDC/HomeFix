@@ -37,6 +37,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			datauser:[],
 			categories: [],
 			datauserprofile: [],
+			userProducts: [],
 
 		}, 
 		actions: {
@@ -358,7 +359,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getProductsByUser: async () => {
 				const store = getStore();
-				const response = await fetch(`${process.env.BACKEND_URL}/api/productsbyuser/${store.user.email}`, {
+				console.log(store.user.email)
+				const response = await fetch(`${process.env.BACKEND_URL}/api/productsbyuser/${localStorage.email}`, {
 					method: 'GET',
 				})
 				const data = await response.json()

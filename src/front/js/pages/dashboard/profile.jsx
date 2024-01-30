@@ -39,6 +39,7 @@ export function Profile() {
         console.log("Fetching products...");
         const user_be = localStorage.getItem('userbe_id')
         await actions.getuser(user_be);
+        await actions.getProductsByUser();
         console.log(store.datauser)
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -129,7 +130,7 @@ export function Profile() {
           </Typography>
           <div className="mb-12 mt-12 grid gap-y-10 gap-x-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 
-            {store.products.map((product) => (
+            {store.userProducts.map((product) => (
               <StatisticsCard
                 key={product.id}
                 images_urls={product.images_urls}
