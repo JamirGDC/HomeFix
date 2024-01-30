@@ -24,7 +24,7 @@ export function StatisticsCard({ images_urls, key, title, product_description, p
 
   const viewProfile = () => {
     setUserId(product_seller_id);
-    navigate(`/dashboard/profileuser/${product_seller_id}`);
+    navigate(`/dashboard/chathomefix/${product_seller_id}`, { state: { userId: user_id } });
   }
 
   const setuser = () => {
