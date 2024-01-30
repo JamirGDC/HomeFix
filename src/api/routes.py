@@ -4,17 +4,19 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User_be, Product, Province, Category
 from api.utils import generate_sitemap, APIException
-from flask_cors import CORS
+# from flask_cors import CORS
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from werkzeug.security import generate_password_hash
 import json
 from datetime import timedelta
 from dotenv import load_dotenv
 import os, requests
+from flask_cors import CORS, cross_origin
 
 
 api = Blueprint('api', __name__)
 
+CORS(api, origins=["http://localhost:3000", "http://localhost:3001","http://localhost:3001/api/todoist/auth", "http://localhost:3001/api/todoist/callback","http://127.0.0.1:3000/home?, http://localhost:3000/dashboard/profile"])
 
 
 load_dotenv()
@@ -382,7 +384,7 @@ def obtener_productos_por_categoria(categoria_id):
     return jsonify(productos_serializados)
 
 
-@api.route("/deteleproduct/<int:product_id>", methods=["DELETE"])
+@api.route('/deleteproduct/<int:product_id>', methods=["DELETE"])
 @jwt_required()
 def delete_product(product_id):
     try:

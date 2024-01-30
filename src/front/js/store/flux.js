@@ -369,13 +369,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(store.userProducts)
 			},
 
-			deleteProduct: async (product_id) => {
+			deleteProduct: async () => {
 				try {
 					const token = localStorage.getItem('token');
-					const response = await fetch(`${process.env.BACKEND_URL}/api/deleteproduct/${product_id}`, {
+					const response = await fetch(`${process.env.BACKEND_URL}/api/deleteproduct/1`, {
 						method: 'DELETE',
 						headers: {
 							'Authorization': `Bearer ${token}`,
+							
 						}
 					});
 					if (!response.ok) {
