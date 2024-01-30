@@ -32,6 +32,8 @@ import { platformSettingsData, conversationsData, projectsData } from "../../dat
 export function Profile() {
   const { store, actions } = useContext(Context);
   const [loading, setLoading] = useState(true)
+  const [products, setProducts] = useState([]); // Estado local para almacenar los productos
+
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -40,6 +42,8 @@ export function Profile() {
         const user_be = localStorage.getItem('userbe_id')
         await actions.getuser(user_be);
         await actions.getProductsByUser();
+        setProducts(store.userProducts); // Almacenar los productos en el estado local
+        setLoading(false)
         console.log(store.datauser)
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -49,6 +53,10 @@ export function Profile() {
     fetchProducts();
   }, []);
 
+  const deleteProductAndUpdateState = async (productId) => {
+    await actions.deleteProduct(productId);
+    setProducts(products.filter(product => product.id !== productId));
+  }
 
 
 
@@ -130,7 +138,7 @@ export function Profile() {
           </Typography>
           <div className="mb-12 mt-12 grid gap-y-10 gap-x-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 
-            {store.userProducts.map((product) => (
+            {products.map((product) => (
               <Profileproductcard
                 key={product.id}
                 images_urls={product.images_urls}
@@ -140,6 +148,7 @@ export function Profile() {
                 product_seller={product.seller.email}
                 product_seller_id={product.seller.id}
                 product_id={product.id}
+                onDeleteProduct={deleteProductAndUpdateState}
               />
             ))}
 

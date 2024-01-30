@@ -8,6 +8,10 @@ import {
   CardFooter,
   Typography,
   Button,
+  Popover,
+  PopoverContent,
+  PopoverHandler,
+  Input,
 } from "@material-tailwind/react";
 
 
@@ -19,14 +23,24 @@ import { Link, Navigate } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { accelerate } from "@cloudinary/url-gen/actions/effect";
 
-export function Profileproductcard({ images_urls, key, title, product_description, product_price, product_seller, product_seller_id, product_id }) {
-  const { store, actions } = useContext(Context);
+export function Profileproductcard({ images_urls, key, title, product_description, product_price, product_seller, product_seller_id, product_id, onDeleteProduct }) {
+  const { actions } = useContext(Context);
   const [user_id, setUserId] = useState('');
   const navigate = useNavigate();
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [popoverOpen, setPopoverOpen] = useState(false);
 
+  const viewProfile = () => {
+    setShowConfirmation(true);
+  }
 
-  const viewProfile = async () => {
+  const deleteProductAndUpdateState = async () => {
     await actions.deleteProduct(product_id);
+    onDeleteProduct(product_id);
+  }
+
+  const cancelDelete = () => {
+    setPopoverOpen(false); 
   }
 
   const setuser = () => {
@@ -34,16 +48,11 @@ export function Profileproductcard({ images_urls, key, title, product_descriptio
     console.log(user_id);
     navigate(`/dashboard/chathomefix/${product_seller_id}`);
   }
+
   return (
     <Card className="max-w-72">
       <CardHeader shadow={true} floated={false} className="h-52 mt-3 mx-3">
         <Carousel className='className="rounded-xl h-52'>
-          {/* <img
-            src={images_urls}
-            alt={`image-0`}
-
-            className="h-52 w-full object-cover"
-          /> */}
           {images_urls && images_urls.map((imageUrl, index) => (
             <img
               key={index}
@@ -59,7 +68,6 @@ export function Profileproductcard({ images_urls, key, title, product_descriptio
           <Typography color="blue-gray" className="font-medium">
             {title}
           </Typography>
-
         </div>
         <Typography
           variant="small"
@@ -76,14 +84,51 @@ export function Profileproductcard({ images_urls, key, title, product_descriptio
           >
             {product_seller}
           </Typography>
-          <div>
-
-          </div>
+          <div></div>
         </div>
       </CardBody>
+
+      {showConfirmation && (
+        <Popover
+          animate={{
+            mount: { scale: 1, y: 0 },
+            unmount: { scale: 0, y: 25 },
+          }}
+        >
+          <PopoverHandler>
+            <Button>Popover</Button>
+          </PopoverHandler>
+          <PopoverContent>
+            This is a very beautiful popover, show some love.
+          </PopoverContent>
+        </Popover>
+      )}
+
+      {/* {showConfirmation && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white p-8 rounded-lg">
+            <p>¿Estás seguro de que quieres eliminar esta publicación? Esta acción es irreversible.</p>
+            <div className="mt-4 flex justify-center">
+              <Button
+                color="blue"
+                onClick={deleteProductAndUpdateState}
+                className="mr-4"
+              >
+                Confirmar
+              </Button>
+              <Button
+                color="red"
+                onClick={cancelDelete}
+              >
+                Cancelar
+              </Button>
+            </div>
+          </div>
+        </div>
+      )} */}
+
+
       <CardFooter className="pt-0 px-3 flex flex-row gap-3">
-
-
         <Button
           onClick={setuser}
           ripple={false}
@@ -93,16 +138,35 @@ export function Profileproductcard({ images_urls, key, title, product_descriptio
           Editar
         </Button>
 
+        <Popover placement="top" >
+          <PopoverHandler>
+            <Button
+              ripple={false}
+              fullWidth={true}
+              className="bg-red-500 text-blue-gray-900 h-full shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100 w-[30%] p-0 flex flex-row justify-center content-center items-center"
+            >
+              <TrashIcon className="w-5 h-5 text-white" />
+            </Button>
+          </PopoverHandler>
+          <PopoverContent className="w-96">
+            <Typography color="blue-gray" className="font-medium pb-[10px]">
+              ¿Estás seguro de que quieres eliminar esta publicación? Esta acción es irreversible.
+            </Typography>
+            <div className="flex flex-row justify-center gap-2">
+
+              <Button onClick={deleteProductAndUpdateState} variant="gradient" color="red" className="flex-shrink-0 ">
+                Confirmar
+              </Button>
+
+            </div>
+          </PopoverContent>
+        </Popover>
 
 
-        <Button
-          ripple={false}
-          fullWidth={true}
-          onClick={viewProfile}
-          className="bg-red-500 text-blue-gray-900 h-full shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100 w-[30%] p-0 flex flex-row justify-center content-center items-center"
-        >
-          <TrashIcon className="w-5 h-5 text-white" />
-        </Button>
+
+
+
+
       </CardFooter>
     </Card>
   );
