@@ -13,6 +13,7 @@ import {
   Checkbox,
   Input,
   Button,
+  Spinner,
   CardBody,
   Icon,
   Select,
@@ -67,7 +68,7 @@ export function Notifications() {
       setTimeout(() => {
         setShowSuccessPopover(false);
         navigate("/dashboard/profile");
-      }, 3000); // Puedes ajustar el tiempo según tus necesidades
+      }, 1500); // Puedes ajustar el tiempo según tus necesidades
     }
   }, [showSuccessPopover]);
 
@@ -313,8 +314,8 @@ export function Notifications() {
               </Button>
             </PopoverHandler>
             {showSuccessPopover && (
-              <PopoverContent>
-                Tu publicación se ha creado con éxito
+              <PopoverContent className='flex justify-center gap-1'>
+                <Spinner className="h-4 w-4" />Tu publicación se ha creado con éxito
               </PopoverContent>
             )}
           </Popover>

@@ -129,22 +129,24 @@ export function Profileproductcard({ images_urls, key, title, product_descriptio
 
 
       <CardFooter className="pt-0 px-3 flex flex-row gap-3">
-        <Button
+        {/* <Button
           onClick={setuser}
           ripple={false}
           fullWidth={true}
           className="bg-[#2A2A2A] text-white shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100 w-[70%]"
         >
           Editar
-        </Button>
+        </Button> */}
 
         <Popover placement="top" >
           <PopoverHandler>
             <Button
               ripple={false}
               fullWidth={true}
-              className="bg-red-500 text-blue-gray-900 h-full shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100 w-[30%] p-0 flex flex-row justify-center content-center items-center"
+              color="red"
+              className="flex justify-center content-center align-center gap-3 center text-white shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100 w-[70%"
             >
+              <p className="align-center text-center">Eliminar</p>
               <TrashIcon className="w-5 h-5 text-white" />
             </Button>
           </PopoverHandler>

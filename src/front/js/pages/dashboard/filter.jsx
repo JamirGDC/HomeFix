@@ -66,7 +66,7 @@ export function Filter() {
     };
 
     fetchProducts();
-  }, []);
+  }, [category_id]);
 
   if (loading) {
     return <p>Cargando productos...</p>;
@@ -126,10 +126,11 @@ export function Filter() {
         show={5}
 
       >
-        {Categorycarddata.map(({ img, text }) => (
+        {Categorycarddata.map(({ img, text, id }) => (
           <CategoryCard
             images_urls={img}
             text={text}
+            id = {id}
 
           >
 

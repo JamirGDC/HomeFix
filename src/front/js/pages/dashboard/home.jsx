@@ -1,18 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import {
-  Typography,
-  Card,
-  CardHeader,
-  CardBody,
-  IconButton,
-  Menu,
-  MenuHandler,
-  MenuList,
-  MenuItem,
-  Avatar,
-  Tooltip,
-  Progress,
   Spinner,
 } from "@material-tailwind/react";
 
@@ -78,7 +66,6 @@ export function Home() {
   };
   const responsive = {
     superLargeDesktop: {
-      // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
       items: 8
     },
@@ -135,7 +122,6 @@ export function Home() {
             images_urls={img}
             text={text}
             id={id}
-
           >
 
           </CategoryCard>

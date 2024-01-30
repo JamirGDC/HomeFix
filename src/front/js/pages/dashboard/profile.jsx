@@ -32,7 +32,7 @@ import { platformSettingsData, conversationsData, projectsData } from "../../dat
 export function Profile() {
   const { store, actions } = useContext(Context);
   const [loading, setLoading] = useState(true)
-  const [products, setProducts] = useState([]); // Estado local para almacenar los productos
+  const [products, setProducts] = useState([]);
 
 
   useEffect(() => {
@@ -42,7 +42,7 @@ export function Profile() {
         const user_be = localStorage.getItem('userbe_id')
         await actions.getuser(user_be);
         await actions.getProductsByUser();
-        setProducts(store.userProducts); // Almacenar los productos en el estado local
+        setProducts(store.userProducts);
         setLoading(false)
         console.log(store.datauser)
       } catch (error) {
