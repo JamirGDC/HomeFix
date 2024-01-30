@@ -181,7 +181,7 @@ export function Notifications() {
             </Typography>
             <Input
               size="lg"
-              placeholder="name@mail.com"
+              placeholder=""
               className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
               type="text"
               name="name"
@@ -205,10 +205,10 @@ export function Notifications() {
               placeholder=" "></textarea>
 
 
-            <Typography variant="h6" color="blue-gray" className="-mb-3">
+            {/* <Typography variant="h6" color="blue-gray" className="-mb-3">
               ¿Quieres Añadirle un precio a lo que haces?
-            </Typography>
-            <Input
+            </Typography> */}
+            {/* <Input
               size="lg"
               type="number"
               name="price"
@@ -219,7 +219,7 @@ export function Notifications() {
               labelProps={{
                 className: "before:content-none after:content-none",
               }}
-            />
+            /> */}
             <Typography variant="h6" color="blue-gray" className="-mb-3">
               Selecciona una categoria
             </Typography>
