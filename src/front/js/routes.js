@@ -85,7 +85,7 @@ export const routes = [
       {
         icon: <UserCircleIcon {...icon} />,
         name: "test",
-        path: "/test",
+        path: "/test/:product_id",
         element: <Test />,
       },
     ],

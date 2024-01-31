@@ -16,9 +16,10 @@ import { Carousel } from 'react-responsive-carousel';
 import { Link, Navigate } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
-export function StatisticsCard({ images_urls, key, title, product_description, product_price, product_seller, product_seller_id }) {
+export function StatisticsCard({ images_urls, key, title, product_description, product_price, product_seller, product_seller_id, producto_id }) {
 
   const [user_id, setUserId] = useState('');
+  const [product_id, setProductid] = useState('');
   const navigate = useNavigate();
 
 
@@ -27,11 +28,13 @@ export function StatisticsCard({ images_urls, key, title, product_description, p
     navigate(`/dashboard/chathomefix/${product_seller_id}`, { state: { userId: user_id } });
   }
 
-  const setuser = () => {
-    setUserId(product_seller_id);
-    console.log(user_id);
-    navigate(`/dashboard/chathomefix/${product_seller_id}`);
+  const viewProduct = () => {
+    setProductid(producto_id);
+    navigate(`/dashboard/test/${producto_id}`, { state: { productId: producto_id } });
   }
+
+
+  
   return (
     <Card className="max-w-72">
       <CardHeader shadow={true} floated={false} className="h-52 mt-3 mx-3">
@@ -83,7 +86,7 @@ export function StatisticsCard({ images_urls, key, title, product_description, p
 
 
         <Button
-          onClick={setuser}
+          onClick={viewProfile}
           ripple={false}
           fullWidth={true}
           className="bg-[#2A2A2A] text-white shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100 w-[70%]"
@@ -96,7 +99,7 @@ export function StatisticsCard({ images_urls, key, title, product_description, p
         <Button
           ripple={false}
           fullWidth={true}
-          onClick={viewProfile}
+          onClick={viewProduct}
           className="bg-blue-gray-900/10 text-blue-gray-900 h-full shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100 w-[30%] p-0 flex flex-row justify-center content-center items-center"
         >
           <MagnifyingGlassIcon className="w-5 h-5 text-blue-gray-900" />

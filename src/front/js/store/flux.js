@@ -38,6 +38,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			categories: [],
 			datauserprofile: [],
 			userProducts: [],
+			productDetails: [],
 
 		}, 
 		actions: {
@@ -386,49 +387,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.error('Error deleting product:', error);
 				}
-			}
+			},
+			getProductById: async (producto_id) => {
+				const store = getStore();
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/api/product/${producto_id}`);
+					if (!response.ok) {
+						throw new Error(`HTTP error! status: ${response.status}`);
+					}
+					const data = await response.json();
+					console.log("Detalles del producto recibidos:", data);
+					setStore({ ...store, productDetails: data });
+					localStorage.setItem('productDetails', JSON.stringify(data));
+				} catch (error) {
+					console.error("Error loading product details:", error);
+				}
+			},
 
 
 
-			// getUserProducts: async () => {
-			// 	const store = getStore();
-			// 	try {
-			// 		const response = await fetch(`${process.env.BACKEND_URL}/api/productsbyuser`);
-			// 		const data = await response.json();
-
-			// 		setStore({ ...store, productsbyuser: data });
-
-			// 	} catch (error) {
-			// 		console.error("Error loading provinces from backend:", error);
-			// 	}
-			// },
-
-
-			// getUserProducts: async (email, token) => {
-			// 	const store = getStore();
-
-			// 	try {
-			// 		const url = `${process.env.BACKEND_URL}/api/productsbyuser?email=${encodeURIComponent(email)}`;
-
-			// 		const response = await fetch(url, {
-			// 			method: 'GET',
-			// 			headers: {
-			// 				'Content-Type': 'application/json',
-			// 				'Authorization': `Bearer ${token}`
-			// 			}
-			// 		});
-
-			// 		const data = await response.json();
-
-			// 		// Convierte data a una cadena JSON antes de almacenarla en localStorage
-			// 		localStorage.setItem('productsbyuser', JSON.stringify(data));
-
-			// 		setStore({ ...store, productsbyuser: data });
-			// 	} catch (error) {
-			// 		console.error("Error loading user products from backend:", error);
-			// 	}
-			// },
-
+			
 
 
 
