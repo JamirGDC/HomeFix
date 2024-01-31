@@ -38,6 +38,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			categories: [],
 			datauserprofile: [],
 			userProducts: [],
+			productDetails: [],
 
 		}, 
 		actions: {
@@ -386,7 +387,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.error('Error deleting product:', error);
 				}
-			}
+			},
+			getProductById: async (productId) => {
+				const store = getStore();
+				try {
+					console.log("Solicitando detalles del producto para ID:", productId);
+					const response = await fetch(`${process.env.BACKEND_URL}/api/product/${productId}`);
+					if (!response.ok) {
+						throw new Error(`HTTP error! status: ${response.status}`);
+					}
+					const data = await response.json();
+					console.log("Detalles del producto recibidos:", data);
+					setStore({ ...store, productDetails: data });
+				} catch (error) {
+					console.error("Error loading product details:", error);
+				}
+			},
 
 
 

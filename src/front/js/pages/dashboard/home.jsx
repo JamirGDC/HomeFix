@@ -142,6 +142,7 @@ export function Home() {
             product_price={product.price}
             product_seller={product.seller.email}
             product_seller_id={product.seller.id}
+            productId={product.id}
           />
         ))}
 

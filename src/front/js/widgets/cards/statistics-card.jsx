@@ -16,7 +16,7 @@ import { Carousel } from 'react-responsive-carousel';
 import { Link, Navigate } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
-export function StatisticsCard({ images_urls, key, title, product_description, product_price, product_seller, product_seller_id }) {
+export function StatisticsCard({ images_urls, key, title, product_description, product_price, product_seller, product_seller_id, productId }) {
 
   const [user_id, setUserId] = useState('');
   const navigate = useNavigate();
@@ -26,6 +26,10 @@ export function StatisticsCard({ images_urls, key, title, product_description, p
     setUserId(product_seller_id);
     navigate(`/dashboard/chathomefix/${product_seller_id}`, { state: { userId: user_id } });
   }
+  const handleLupaClick = () => {
+    console.log("ID del producto a buscar:", productId);
+    navigate(`/dashboard/info/${productId}`, { state: { productId: productId } });
+  };
 
   const setuser = () => {
     setUserId(product_seller_id);
@@ -96,7 +100,7 @@ export function StatisticsCard({ images_urls, key, title, product_description, p
         <Button
           ripple={false}
           fullWidth={true}
-          onClick={viewProfile}
+          onClick={handleLupaClick}
           className="bg-blue-gray-900/10 text-blue-gray-900 h-full shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100 w-[30%] p-0 flex flex-row justify-center content-center items-center"
         >
           <MagnifyingGlassIcon className="w-5 h-5 text-blue-gray-900" />

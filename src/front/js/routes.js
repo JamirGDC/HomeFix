@@ -9,7 +9,7 @@ import {
   QuestionMarkCircleIcon,
   PaperAirplaneIcon,
 } from "@heroicons/react/24/solid";
-import { Home, Profile, Chathomefix, Notifications, PoliticaPrivacidad, Contact, About, Questions, Profileuser, Filter, Test } from "./pages/dashboard";
+import { Home, Profile, Chathomefix, Notifications, PoliticaPrivacidad, Contact, About, Questions, Profileuser, Filter, Test, Info } from "./pages/dashboard";
 import { SignIn, SignUp, CompletePerfil } from "./pages/auth";
 
 const icon = {
@@ -88,6 +88,18 @@ export const routes = [
         path: "/test",
         element: <Test />,
       },
+      {
+        icon: <UserCircleIcon {...icon} />, 
+        name: "Info",
+        path: "/info/:productId", 
+        element: <Info />,
+      },
+      {
+        icon: <RectangleStackIcon {...icon} />,
+        name: "complete perfil",
+        path: "/completeperfil",
+        element: <CompletePerfil />,
+      },
     ],
   },
   {
@@ -106,12 +118,7 @@ export const routes = [
         path: "/sign-up",
         element: <SignUp />,
       },
-      {
-        icon: <RectangleStackIcon {...icon} />,
-        name: "complete perfil",
-        path: "/completeperfil",
-        element: <CompletePerfil />,
-      },
+     
 
 
 
