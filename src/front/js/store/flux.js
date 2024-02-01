@@ -335,6 +335,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					setStore({ ...store, categories: data });
 					localStorage.setItem('categories', JSON.stringify(data));
+					
 
 				} catch (error) {
 					console.error("Error loading categories from backend:", error);

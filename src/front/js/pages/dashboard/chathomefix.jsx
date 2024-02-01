@@ -23,17 +23,7 @@ import logo from '@img/profile-picture.jpg';
 import '../css/custom-chat-theme.css'
 import { name } from "@cloudinary/url-gen/actions/namedTransformation";
 
-
-
-
 const apiKey = process.env.REACT_APP_STREAM_API_KEY;
-
-
-
-
-
-
-
 const sort = { last_message_at: -1 };
 const options = { state: true, watch: true, presence: true, limit: 10 };
 
@@ -46,7 +36,9 @@ export function Chathomefix() {
     useEffect(() => {
         const userIdFromLocalStorage = localStorage.getItem("userbe_id");
         const nameFromLocalStorage = localStorage.getItem("name");
-        const username = nameFromLocalStorage || "Usuario" + userIdFromLocalStorage;
+        const username = (nameFromLocalStorage === "null" || nameFromLocalStorage === null) ? "User" + userIdFromLocalStorage : nameFromLocalStorage;
+        
+        console.log(username);
 
         setUser({
             id: userIdFromLocalStorage,

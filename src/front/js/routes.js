@@ -36,7 +36,7 @@ export const routes = [
 
       {
         icon: <RectangleStackIcon {...icon} />,
-        name: "chat",
+        name: "Chat",
         path: "/chathomefix/:user_id",
         element: <Chathomefix />,
       },

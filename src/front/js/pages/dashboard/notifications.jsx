@@ -12,7 +12,7 @@ import {
   CardHeader,
   Checkbox,
   Input,
-  Button,
+  Button,  
   Spinner,
   CardBody,
   Icon,
@@ -22,8 +22,10 @@ import {
   Popover,
   PopoverContent,
   PopoverHandler,
+  
+  
 } from "@material-tailwind/react";
-import { InformationCircleIcon } from "@heroicons/react/24/outline";
+import { InformationCircleIcon, CloudArrowUpIcon } from "@heroicons/react/24/outline";
 import { Navigate } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
@@ -132,7 +134,6 @@ export function Notifications() {
       })
     );
 
-    // Actualiza el estado con las URLs de las imágenes cargadas
     setFormData({ ...formData, imageFiles: uploadedImages });
     console.log('Image URLs:', uploadedImages.filter(url => url !== null));
   };
@@ -141,10 +142,8 @@ export function Notifications() {
     e.preventDefault();
     const { name, description, price, imageFiles, province, category } = formData;
 
-    // Llama a la acción para crear una nueva publicación con las URLs de las imágenes
     actions.createProduct(name, description, parseFloat(price), imageFiles, province, category);
     setShowSuccessPopover(true);
-    // Limpia el formulario después de la creación
     setFormData({ name: '', description: '', price: '', imageFiles: [], province: '', category: [] });
   };
 
@@ -166,8 +165,8 @@ export function Notifications() {
   const alerts = ["gray", "green", "orange", "red"];
 
   return (
-    <div className=" flex max-w-screen-lg flex-col gap-8 bg-white p-4 rounded-xl mt-[4rem]">
-      <Card color="transparent" shadow={false}>
+    <div className="flex justify-center mt-12">
+      <Card color="white" className='p-4' shadow={false}>
         <Typography variant="h4" color="blue-gray">
           Crear una Nueva publicacion
         </Typography>
@@ -279,27 +278,60 @@ export function Notifications() {
               </select>
             </div>
 
-
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                Subir Imágenes:
-                <input
-                  type="file"
-                  name="file"
-                  accept="image/*"
-                  multiple
-                  onChange={handleImageUpload}
-                />
+            <div>
+              <label htmlFor="fileUpload" className="block mb-2 text-lg font-medium text-gray-700">
+                Subir imágenes:
+              </label>
+              <input
+                id="fileUpload"
+                type="file"
+                name="file"
+                accept="image/*"
+                multiple
+                onChange={handleImageUpload}
+                className="hidden"
+              />
+              <label htmlFor="fileUpload" className="flex justify-center px-4 py-2 bg-black text-white rounded-lg cursor-pointer hover:bg-blue-600">
+                <CloudArrowUpIcon className="w-5 h-5 mr-2" />
+                Seleccionar imágenes
               </label>
 
-              <div className="flex flex-wrap mt-2">
+              <div className="flex flex-wrap mt-4">
                 {formData.imageFiles.map((imageUrl, index) => (
                   <div key={index} className="m-2">
-                    <img src={imageUrl} alt={`Thumbnail ${index}`} className="w-16 h-16 object-cover" />
+                    <img
+                      src={imageUrl}
+                      alt={`Thumbnail ${index}`}
+                      className="w-24 h-24 object-cover rounded-lg shadow-md"
+                    />
                   </div>
                 ))}
               </div>
             </div>
+
+
+
+
+
+
+            {/* <Input
+              type="file"
+              name="file"
+              accept="image/*"
+              multiple
+              capture="Select Images"
+              onChange={handleImageUpload}
+            />
+
+
+            <div className="flex flex-wrap mt-2">
+              {formData.imageFiles.map((imageUrl, index) => (
+                <div key={index} className="m-2">
+                  <img src={imageUrl} alt={`Thumbnail ${index}`} className="w-16 h-16 object-cover" />
+                </div>
+              ))}
+            </div> */}
+
 
           </div>
 

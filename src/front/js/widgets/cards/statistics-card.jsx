@@ -16,7 +16,7 @@ import { Carousel } from 'react-responsive-carousel';
 import { Link, Navigate } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
-export function StatisticsCard({ images_urls, key, title, product_description, product_price, product_seller, product_seller_id, producto_id }) {
+export function StatisticsCard({ images_urls, key, title, product_description, product_price, product_seller, product_seller_id, producto_id, categoria }) {
 
   const [user_id, setUserId] = useState('');
   const [product_id, setProductid] = useState('');
@@ -37,7 +37,7 @@ export function StatisticsCard({ images_urls, key, title, product_description, p
   
   return (
     <Card className="max-w-72">
-      <CardHeader shadow={true} floated={false} className="h-52 mt-3 mx-3">
+      <CardHeader shadow={true} floated={false} className="h-52 mt-2 mx-2">
         <Carousel className='className="rounded-xl h-52'>
           {/* <img
             src={images_urls}
@@ -55,7 +55,9 @@ export function StatisticsCard({ images_urls, key, title, product_description, p
           ))}
         </Carousel>
       </CardHeader>
-      <CardBody className='p-3 pb-0'>
+      <CardBody className='p-3 pt-1 pb-0'>
+        <Button 
+        color="white" className="border p-[3px] text-[8px] text-gray-500">{categoria}</Button>
         <div className="mb-2 flex items-center justify-between">
           <Typography color="blue-gray" className="font-medium">
             {title}
@@ -82,7 +84,7 @@ export function StatisticsCard({ images_urls, key, title, product_description, p
           </div>
         </div>
       </CardBody>
-      <CardFooter className="pt-0 px-3 flex flex-row gap-3">
+      <CardFooter className="pb-2 pt-0 px-2 flex flex-row gap-1">
 
 
         <Button

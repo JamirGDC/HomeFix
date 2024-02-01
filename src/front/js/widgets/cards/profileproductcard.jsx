@@ -23,7 +23,7 @@ import { Link, Navigate } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { accelerate } from "@cloudinary/url-gen/actions/effect";
 
-export function Profileproductcard({ images_urls, key, title, product_description, product_price, product_seller, product_seller_id, product_id, onDeleteProduct }) {
+export function Profileproductcard({ images_urls, key, title, product_description, product_price, product_seller, product_seller_id, product_id, onDeleteProduct, categoria }) {
   const { actions } = useContext(Context);
   const [user_id, setUserId] = useState('');
   const navigate = useNavigate();
@@ -51,7 +51,7 @@ export function Profileproductcard({ images_urls, key, title, product_descriptio
 
   return (
     <Card className="max-w-72">
-      <CardHeader shadow={true} floated={false} className="h-52 mt-3 mx-3">
+      <CardHeader shadow={true} floated={false} className="h-52 mt-2 mx-2">
         <Carousel className='className="rounded-xl h-52'>
           {images_urls && images_urls.map((imageUrl, index) => (
             <img
@@ -63,7 +63,9 @@ export function Profileproductcard({ images_urls, key, title, product_descriptio
           ))}
         </Carousel>
       </CardHeader>
-      <CardBody className='p-3 pb-0'>
+      <CardBody className='p-3 pt-1 pb-0'>
+      <Button 
+        color="white" className="border p-[3px] text-[8px] text-gray-500">{categoria}</Button>
         <div className="mb-2 flex items-center justify-between">
           <Typography color="blue-gray" className="font-medium">
             {title}
@@ -128,7 +130,7 @@ export function Profileproductcard({ images_urls, key, title, product_descriptio
       )} */}
 
 
-      <CardFooter className="pt-0 px-3 flex flex-row gap-3">
+      <CardFooter className="pt-0 pb-2 px-2 flex flex-row gap-3">
         {/* <Button
           onClick={setuser}
           ripple={false}

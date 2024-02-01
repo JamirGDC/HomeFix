@@ -127,7 +127,8 @@ export function Home() {
             product_seller={product.seller.email}
             product_seller_id={product.seller.id}
             producto_id={product.id}
-          />
+            categoria={product.categories.length > 0 ? product.categories[0].name : ""}
+            />
         ))}
 
         
