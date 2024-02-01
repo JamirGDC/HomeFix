@@ -162,6 +162,8 @@ export function Filter() {
             product_price={product.price}
             product_seller={product.seller.email}
             product_seller_id={product.seller.id}
+            province = {product.province}
+            categoria={product.categories.length > 0 ? product.categories[0].name : ""}
           />
         ))}
 

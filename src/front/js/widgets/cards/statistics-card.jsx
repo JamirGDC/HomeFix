@@ -38,7 +38,7 @@ export function StatisticsCard({ images_urls, key, title, product_description, p
   return (
     <Card className="max-w-72 border border-black ">
       <CardHeader shadow={true} floated={false} className="h-52 mt-2 mx-2">
-        <Carousel className='className="rounded-xl h-52'>
+        <Carousel className='className="rounded-xl h-52 flex flex-row p-0'>
           {/* <img
             src={images_urls}
             alt={`image-0`}
@@ -50,7 +50,7 @@ export function StatisticsCard({ images_urls, key, title, product_description, p
               key={index}
               src={imageUrl}
               alt={`image-${index}`}
-              className="h-52 w-full object-cover"
+              className="h-52 w-52 object-cover"
             />
           ))}
         </Carousel>

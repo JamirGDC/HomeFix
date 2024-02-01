@@ -113,8 +113,8 @@ export function Home() {
         ))}
       </Carousel>
 
-      <hr className="my-2 border-blue-gray-50" />
-      <h2>Ultimos Productos</h2>
+      <hr className="my-2 border-blue-gray-50 mt-5" />
+      <h2 test>Publicaciones Mas Recientes</h2>
       <div className="mb-12 mt-12 grid gap-y-10 gap-x-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 
         {store.products.map((product) => (
