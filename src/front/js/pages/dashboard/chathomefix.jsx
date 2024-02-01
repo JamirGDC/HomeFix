@@ -17,6 +17,9 @@ import { authorsTableData, projectsTableData } from "../../data";
 import { StreamChat } from 'stream-chat'
 import { Chat, Channel, ChannelHeader, ChannelList, Window, MessageInput, MessageList, Thread, LoadingIndicator } from 'stream-chat-react'
 import "stream-chat-react/dist/css/index.css";
+// import 'stream-chat-react/dist/css/v2/index.layout.css';
+// import 'stream-chat-react/dist/css/v2/index.css';
+
 
 import logo from '@img/profile-picture.jpg';
 
@@ -105,8 +108,8 @@ export function Chathomefix() {
     const filters = { type: 'messaging', members: { $in: [user.id] } };
 
     return (
-       
-                <Chat client={client} theme={'messaging light'}>
+       <div className="mt-12">
+        <Chat client={client} theme={'messaging light'}>
                     <ChannelList
                         filters={filters}
                         sort={sort}
@@ -121,6 +124,8 @@ export function Chathomefix() {
                         <Thread />
                     </Channel>
                 </Chat>
+       </div>
+                
     );
 }
 

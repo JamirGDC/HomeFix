@@ -16,7 +16,7 @@ import { Carousel } from 'react-responsive-carousel';
 import { Link, Navigate } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
-export function StatisticsCard({ images_urls, key, title, product_description, product_price, product_seller, product_seller_id, producto_id, categoria }) {
+export function StatisticsCard({ images_urls, key, title, product_description, product_seller, product_seller_id, producto_id, categoria, province }) {
 
   const [user_id, setUserId] = useState('');
   const [product_id, setProductid] = useState('');
@@ -34,9 +34,9 @@ export function StatisticsCard({ images_urls, key, title, product_description, p
   }
 
 
-  
+
   return (
-    <Card className="max-w-72">
+    <Card className="max-w-72 border border-black ">
       <CardHeader shadow={true} floated={false} className="h-52 mt-2 mx-2">
         <Carousel className='className="rounded-xl h-52'>
           {/* <img
@@ -56,8 +56,10 @@ export function StatisticsCard({ images_urls, key, title, product_description, p
         </Carousel>
       </CardHeader>
       <CardBody className='p-3 pt-1 pb-0'>
-        <Button 
-        color="white" className="border p-[3px] text-[8px] text-gray-500">{categoria}</Button>
+        <Button
+          color="green" className="border p-[3px] text-[8px] mr-2 text-black" >{categoria}</Button>
+          <Button 
+        color="orange" className="border p-[3px] text-[8px] text-black">{province}</Button>
         <div className="mb-2 flex items-center justify-between">
           <Typography color="blue-gray" className="font-medium">
             {title}
@@ -71,7 +73,8 @@ export function StatisticsCard({ images_urls, key, title, product_description, p
         >
           {product_description}
         </Typography>
-        <div className="flex flex-row">
+        <div className="flex">
+
           <Typography
             variant="small"
             color="gray"
@@ -79,8 +82,9 @@ export function StatisticsCard({ images_urls, key, title, product_description, p
           >
             {product_seller}
           </Typography>
+
           <div>
-            
+
           </div>
         </div>
       </CardBody>
