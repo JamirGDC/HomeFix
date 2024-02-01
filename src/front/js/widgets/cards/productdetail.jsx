@@ -14,7 +14,7 @@ import {
 
 import PropTypes from "prop-types";
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { Carousel } from 'react-responsive-carousel';
+import { Carousel } from "@material-tailwind/react";
 import { Link, Navigate } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
@@ -67,9 +67,7 @@ export function Productdetail({ images_urls, key, title, product_description, pr
               </div>
             </div>
           </CardBody>
-          <CardFooter className="pt-0 px-3 flex flex-row gap-3">
-
-
+          <CardFooter className="pt-0 px-3 flex flex-row gap-3 justify-center items-center content-center">
             <Button
               onClick={viewProfile}
               ripple={false}

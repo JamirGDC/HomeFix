@@ -12,7 +12,7 @@ import {
 
 import PropTypes from "prop-types";
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { Carousel } from 'react-responsive-carousel';
+import { Carousel } from "@material-tailwind/react";
 import { Link, Navigate } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
@@ -32,13 +32,13 @@ export function StatisticsCard({ images_urls, key, title, product_description, p
     setProductid(producto_id);
     navigate(`/dashboard/test/${producto_id}`, { state: { productId: producto_id } });
   }
-
-
-
+  
   return (
+
+    
     <Card className="max-w-72 border border-black ">
       <CardHeader shadow={true} floated={false} className="h-52 mt-2 mx-2">
-        <Carousel className='className="rounded-xl h-52 flex flex-row p-0'>
+        <Carousel className='className="rounded-xl'>
           {/* <img
             src={images_urls}
             alt={`image-0`}
@@ -50,7 +50,7 @@ export function StatisticsCard({ images_urls, key, title, product_description, p
               key={index}
               src={imageUrl}
               alt={`image-${index}`}
-              className="h-52 w-52 object-cover"
+              className="h-52 object-cover"
             />
           ))}
         </Carousel>

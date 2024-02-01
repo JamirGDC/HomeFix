@@ -3,15 +3,15 @@ import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import {
   Spinner,
 } from "@material-tailwind/react";
-import Carousel from 'react-multi-carousel';
+import MultiCarousel from 'react-multi-carousel'; // Renombrado el Carousel de react-multi-carousel a MultiCarousel
 import "react-multi-carousel/lib/styles.css";
-import { StatisticsCard } from "../../widgets/cards";
-import { CategoryCard } from "../../widgets/cards";
+import { StatisticsCard, CategoryCard } from "../../widgets/cards";
 import Categorycarddata from "../../data/categorycarddata"
 import { useState } from 'react';
 import { Context } from '../../store/appContext';
 import { useNavigate } from "react-router-dom";
 import banner from '@img/Bannerhomefix.png';
+import { Carousel } from "@material-tailwind/react";
 
 export function Home() {
 
@@ -89,7 +89,7 @@ export function Home() {
 
 
 
-      <Carousel
+      <MultiCarousel
         customRightArrow={<CustomRightArrow />}
         responsive={responsive}
         infinite={true}
@@ -111,10 +111,12 @@ export function Home() {
           </CategoryCard>
 
         ))}
-      </Carousel>
+      </MultiCarousel>
 
       <hr className="my-2 border-blue-gray-50 mt-5" />
       <h2 test>Publicaciones Mas Recientes</h2>
+
+
       <div className="mb-12 mt-12 grid gap-y-10 gap-x-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 
         {store.products.map((product) => (
@@ -127,15 +129,15 @@ export function Home() {
             product_seller={product.seller.email}
             product_seller_id={product.seller.id}
             producto_id={product.id}
-            province = {product.province}
+            province={product.province}
             categoria={product.categories.length > 0 ? product.categories[0].name : ""}
-            />
+          />
         ))}
 
-        
+
 
       </div>
-      
+
     </div>
   );
 }

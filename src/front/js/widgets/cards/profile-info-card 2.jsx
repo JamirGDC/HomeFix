@@ -7,6 +7,7 @@ import {
   CardBody,
   Typography,
 } from "@material-tailwind/react";
+import { Carousel } from "@material-tailwind/react";
 
 export function ProfileInfoCard({ title, description, details, action }) {
   return (

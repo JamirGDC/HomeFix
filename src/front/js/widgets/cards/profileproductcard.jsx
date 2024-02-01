@@ -18,7 +18,7 @@ import {
 import PropTypes from "prop-types";
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { TrashIcon } from '@heroicons/react/24/outline';
-import { Carousel } from 'react-responsive-carousel';
+import { Carousel } from "@material-tailwind/react";
 import { Link, Navigate } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { accelerate } from "@cloudinary/url-gen/actions/effect";
