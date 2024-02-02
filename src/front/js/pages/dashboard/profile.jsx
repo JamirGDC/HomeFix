@@ -68,7 +68,7 @@ export function Profile() {
               />
               <div>
                 <Typography variant="h5" color="blue-gray" className="mb-1">
-                  {localStorage.datauser.first_name} {store.datauser.last_name}
+                  {localStorage.datauser.name} {localStorage.datauser.apellido}
                 </Typography>
                 {/* <Typography
                   variant="small"
