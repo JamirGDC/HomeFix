@@ -28,13 +28,13 @@ app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this "super secret" to s
 jwt = JWTManager(app)
 
 # database condiguration
-db_url = os.getenv("DATABASE_URL")
-if db_url is not None:
-    app.config['SQLALCHEMY_DATABASE_URI'] = db_url.replace(
-        "postgres://", "postgresql://")
-else:
-    app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:////tmp/test.db"
-    # app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///app.db"
+# db_url = os.getenv("DATABASE_URL")
+# if db_url is not None:
+#     app.config['SQLALCHEMY_DATABASE_URI'] = db_url.replace(
+#         "postgres://", "postgresql://")
+# else:
+# #     app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:////tmp/test.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///app.db"
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 MIGRATE = Migrate(app, db, compare_type=True)
