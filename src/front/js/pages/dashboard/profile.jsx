@@ -30,6 +30,7 @@ export function Profile() {
         console.log("Fetching products...");
         const user_be = localStorage.getItem('userbe_id')
         await actions.getuser(user_be);
+        console.log(localStorage.datauser);
         await actions.getProductsByUser();
         setProducts(store.userProducts);
         setLoading(false)
@@ -67,7 +68,7 @@ export function Profile() {
               />
               <div>
                 <Typography variant="h5" color="blue-gray" className="mb-1">
-                  {store.datauser.first_name} {store.datauser.last_name}
+                  {localStorage.datauser.first_name} {store.datauser.last_name}
                 </Typography>
                 {/* <Typography
                   variant="small"
@@ -97,15 +98,14 @@ export function Profile() {
             </div> */}
           </div>
           <div className="gird-cols-1 mb-12 grid gap-12 px-4 lg:grid-cols-2 xl:grid-cols-3">
-
             <ProfileInfoCard
               title="Perfil de Usuario"
               description=""
               details={{
-                Nombre: store.datauser.first_name,
-                apellido: store.datauser.last_name,
+                Nombre: localStorage.datauser.first_name,
+                apellido: localStorage.datauser.last_name,
                 email: store.datauser.email,
-                Ubicacion: store.datauser.city,
+                Ubicacion: localStorage.datauser.city,
                 // social: (
                 //   <div className="flex items-center gap-4">
                 //     <i className="fa-brands fa-facebook text-blue-700" />

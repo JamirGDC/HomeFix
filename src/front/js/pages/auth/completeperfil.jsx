@@ -95,7 +95,7 @@ export function CompletePerfil() {
             <Input
               size="lg"
               type="text"
-              label="Nombre"
+              label="Direccion"
               value={address_line}
               onChange={e => setAddress_Line(e.target.value)}
             />

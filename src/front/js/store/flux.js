@@ -289,6 +289,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(data);
 
 					setStore({ ...store, datauser: data });
+					localStorage.setItem('datauser', JSON.stringify(data));
 
 				}
 				catch (error) {
