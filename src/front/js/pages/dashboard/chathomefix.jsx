@@ -36,9 +36,13 @@ export function Chathomefix() {
     const [client, setClient] = useState(null);
     const [user, setUser] = useState(null);
 
+
+
     useEffect(() => {
+
+        const name = localStorage.getItem()
         const userIdFromLocalStorage = localStorage.getItem("userbe_id");
-        const nameFromLocalStorage = localStorage.getItem("name");
+        const nameFromLocalStorage = localStorage.getItem("email");
         const username = (nameFromLocalStorage === "null" || nameFromLocalStorage === null) ? "User" + userIdFromLocalStorage : nameFromLocalStorage;
         
         console.log(username);
