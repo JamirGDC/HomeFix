@@ -34,7 +34,7 @@ export function CompletePerfil() {
   const register = async () => {
 
     try {
-      await actions.completeperfil(first_name, last_name, address_line, city, region, postal_code, country, email);
+      await actions.updateuserbe(first_name, last_name, address_line, city, region, postal_code, country, email);
 
       await update_userbe();
 
