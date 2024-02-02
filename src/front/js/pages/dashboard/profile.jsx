@@ -102,10 +102,10 @@ export function Profile() {
               title="Perfil de Usuario"
               description=""
               details={{
-                Nombre: localStorage.datauser.first_name,
-                apellido: localStorage.datauser.last_name,
+                Nombre: localStorage.datauser.name,
+                apellido: localStorage.datauser.apellido,
                 email: store.datauser.email,
-                Ubicacion: localStorage.datauser.city,
+                Ubicacion: localStorage.datauser.province,
                 // social: (
                 //   <div className="flex items-center gap-4">
                 //     <i className="fa-brands fa-facebook text-blue-700" />
