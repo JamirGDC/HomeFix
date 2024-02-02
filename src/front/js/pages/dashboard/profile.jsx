@@ -103,7 +103,7 @@ export function Profile() {
               title="Perfil de Usuario"
               description=""
               details={{
-                Nombre: user.first_name,
+                Nombre: user.name,
                 apellido: user.apellido,
                 email: store.datauser.email,
                 Ubicacion: user.province,
