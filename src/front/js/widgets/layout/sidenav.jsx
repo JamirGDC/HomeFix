@@ -81,7 +81,7 @@ export function Sidenav({ brandImg, brandName, routes }) {
             )}
             {pages.map(({ icon, name, path }) => {
               // Verificar si la página es una página de autenticación
-              if ((name === "Perfil" && !shouldShowProfile()) || (name === "chat" && !shouldShowChat())) {
+              if ((name === "Perfil" && !shouldShowProfile()) || (name === "Chat" && !shouldShowProfile())) {
                 return null;
               }
               if (name === "PerfilUser") {
