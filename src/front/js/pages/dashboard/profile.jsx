@@ -22,6 +22,7 @@ export function Profile() {
   const { store, actions } = useContext(Context);
   const [loading, setLoading] = useState(true)
   const [products, setProducts] = useState([]);
+  const [user, setUser] = useState({});
 
 
   useEffect(() => {
@@ -30,7 +31,7 @@ export function Profile() {
         console.log("Fetching products...");
         const user_be = localStorage.getItem('userbe_id')
         await actions.getuser(user_be);
-        console.log(localStorage.datauser);
+        setUser(store.datauser);
         await actions.getProductsByUser();
         setProducts(store.userProducts);
         setLoading(false)
@@ -68,7 +69,7 @@ export function Profile() {
               />
               <div>
                 <Typography variant="h5" color="blue-gray" className="mb-1">
-                  {localStorage.datauser.name} {localStorage.datauser.apellido}
+                  {user.name} {user.apellido}
                 </Typography>
                 {/* <Typography
                   variant="small"
@@ -102,10 +103,10 @@ export function Profile() {
               title="Perfil de Usuario"
               description=""
               details={{
-                Nombre: localStorage.datauser.name,
-                apellido: localStorage.datauser.apellido,
+                Nombre: user.first_name,
+                apellido: user.apellido,
                 email: store.datauser.email,
-                Ubicacion: localStorage.datauser.province,
+                Ubicacion: user.province,
                 // social: (
                 //   <div className="flex items-center gap-4">
                 //     <i className="fa-brands fa-facebook text-blue-700" />
