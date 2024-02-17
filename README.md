@@ -1,19 +1,10 @@
-# WebApp boilerplate with React JS and Flask API
-Pasos para abrir en codespaces:
+# HOMEFIX
+# PAGINA DEPLOY
 
-Si ya tienes un codespaces abierto -> desde el principio
+- Deploy [Deploy](https://sample-service-name-81xi.onrender.com)
 
-si es un nuevo codespaces -> desde instalar postcss
+  
 
-- posicionarse en la rama principal
-  - git checkout main
-- traer cambios recientes
-  - git pull origin main
-- instalar postcss
-  - npm install -g postcss
-- configurar url backend del .env
-- ejecutar npm
-  - npm run start
   
 # WebApp boilerplate with React JS and Flask API
 
