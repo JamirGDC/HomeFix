@@ -66,29 +66,39 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ demo: demo });
 			},
 
-			updateuserbe: async (userbe_id, mangoid, mangoidwallet, first_name, last_name, perfildone) => {
+			updateuserbe: async ({ userbe_id, mangoid, mangoidwallet, first_name, last_name, province, perfildone }) => {
 				const store = getStore();
+				const actions = getActions();
+			
+				console.log("Enviando datos de actualización:", { userbe_id, mangoid, mangoidwallet, first_name, last_name, province, perfildone });
+				
 				try {
-					const response = await fetch(`${process.env.BACKEND_URL}/api/update_userbe`, {
-						method: 'PUT',
-						headers: {
-							'Content-Type': 'application/json'
-						},
-						body: JSON.stringify({ userbe_id, mangoid, mangoidwallet, first_name, last_name, perfildone })
-					});
-
+				  const response = await fetch(`${process.env.BACKEND_URL}/api/update_userbe`, {
+					method: 'PUT',
+					headers: {
+					  'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({ userbe_id, mangoid, mangoidwallet, first_name, last_name, province, perfildone })
+				  });
+			
+				  if (response.ok) {
 					const data = await response.json();
-					console.log(data);
-
-					setStore({ ...store, user_id: data.user_id });
-					localStorage.setItem('perfildone', data.perfildone);
-					
-
+					console.log("Perfil actualizado correctamente", data);
+			
+					setStore({ ...store, datauser: data });
+					localStorage.setItem('perfildone', data.perfildone.toString());
+			
+					await actions.getuser(userbe_id);
+				  } else {
+					throw new Error("Error al actualizar el perfil");
+				  }
 				} catch (error) {
-					console.error("Error during signup:", error);
+				  console.error("Error en la actualización del perfil:", error);
 				}
 			},
-
+			
+			
+			  
 			createuser: async (username, secret, email) => {
 				const store = getStore();
 				try {

@@ -17,11 +17,11 @@ import { Link } from "react-router-dom";
 export function CompletePerfil() {
 
   const { store, actions } = useContext(Context);
-  const [first_name, setFirst_Name] = useState('');
-  const [last_name, setLastName] = useState('');
+  const [nombre, setNombre] = useState('');
+  const [apellido, setApellido] = useState('');
   const [address_line, setAddress_Line] = useState('');
   const [city, setCity] = useState('');
-  const [region, setRegion] = useState('');
+  const [province, setProvince] = useState('');
   const [postal_code, setPostal_code] = useState('');
   const [country, setCountry] = useState('');
   const navigate = useNavigate();
@@ -32,29 +32,30 @@ export function CompletePerfil() {
   const userbe_id = localStorage.getItem('userbe_id');
 
   const register = async () => {
-
     try {
-      await actions.updateuserbe(first_name, last_name, address_line, city, region, postal_code, country, email);
-
-      await update_userbe();
-
-      setFirst_Name('');
-      setLastName('');
-      setRegion('');
-      setCity('');
-      setPostal_code('');
-      setCountry('');
-      setAddress_Line('');
+      await actions.updateuserbe({
+        userbe_id,
+        mangoid,
+        mangoidwallet,
+        first_name: nombre, 
+        last_name: apellido,
+        city,
+        province, 
+        postal_code,
+        country,
+        perfildone,
+      });
+  
       navigate("/dashboard/home");
-
-
     } catch (error) {
-      console.error('Error en register:', error);
+      console.error('Error en la actualización del perfil:', error);
     }
-  }
+  };
+  
+  
 
   const update_userbe = async () => {
-    await actions.updateuserbe(userbe_id, mangoid, mangoidwallet, first_name, last_name, perfildone);
+    await actions.updateuserbe(userbe_id, mangoid, mangoidwallet, nombre, apellido, province, perfildone);
   }
 
  
@@ -66,7 +67,7 @@ export function CompletePerfil() {
         <img
           src={sign}
           className="h-full w-full object-cover rounded-3xl"
-        />
+        />me
       </div>
       <div className="w-full lg:w-3/5 flex flex-col items-center justify-center">
         <div className="text-center">
@@ -78,8 +79,8 @@ export function CompletePerfil() {
               size="lg"
               type="text"
               label="Nombre"
-              value={first_name}
-              onChange={e => setFirst_Name(e.target.value)}
+              value={nombre}
+              onChange={e => setNombre(e.target.value)}
             />
           </div>
           <div className="mb-1 flex flex-col gap-6">
@@ -87,53 +88,58 @@ export function CompletePerfil() {
               size="lg"
               type="text"
               label="Apellido"
-              value={last_name}
-              onChange={e => setLastName(e.target.value)}
+              value={apellido}
+              onChange={e => setApellido(e.target.value)}
             />
           </div>
+
           <div className="mb-1 flex flex-col gap-6">
             <Input
               size="lg"
               type="text"
               label="Direccion"
               value={address_line}
-              onChange={e => setAddress_Line(e.target.value)}
+              onChange={e => setAddress_Line(e.target.value)} // buscar un campo para la dirección
             />
           </div>
+
           <div className="mb-1 flex flex-col gap-6">
             <Input
               size="lg"
               type="text"
               label="Ciudad"
               value={city}
-              onChange={e => setCity(e.target.value)}
+              onChange={e => setCity(e.target.value)} // buscar un campo para Ciudad
             />
           </div>
+
           <div className="mb-1 flex flex-col gap-6">
             <Input
               size="lg"
               type="text"
               label="Provincia"
-              value={region}
-              onChange={e => setRegion(e.target.value)}
+              value={province}
+              onChange={e => setProvince(e.target.value)}
             />
           </div>
+
           <div className="mb-1 flex flex-col gap-6">
             <Input
               size="lg"
               type="text"
               label="Pais"
               value={country}
-              onChange={e => setCountry(e.target.value)}
+              onChange={e => setCountry(e.target.value)}  // buscar un campo para Pais
             />
           </div>
-          <div className="mb-1 flex flex-col gap-6">
+
+          <div className="mb-1 flex flex-col gap-6"> 
             <Input
               size="lg"
               type="text"
               label="Codigo Postal"
               value={postal_code}
-              onChange={e => setPostal_code(e.target.value)}
+              onChange={e => setPostal_code(e.target.value)} // buscar un campo para Codigo postal
             />
           </div>
 

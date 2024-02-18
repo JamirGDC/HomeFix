@@ -32,6 +32,7 @@ export function Profile() {
         const user_be = localStorage.getItem('userbe_id')
         await actions.getuser(user_be);
         setUser(store.datauser);
+        console.log("Datos del usuario recuperados:", store.datauser);
         await actions.getProductsByUser();
         setProducts(store.userProducts);
         setLoading(false)
@@ -48,8 +49,6 @@ export function Profile() {
     await actions.deleteProduct(productId);
     setProducts(products.filter(product => product.id !== productId));
   }
-
-
 
   return (
     <>
@@ -69,51 +68,20 @@ export function Profile() {
               />
               <div>
                 <Typography variant="h5" color="blue-gray" className="mb-1">
-                  {user.name} {user.apellido}
+                  {store.datauser.name} {store.datauser.apellido}
                 </Typography>
-                {/* <Typography
-                  variant="small"
-                  className="font-normal text-blue-gray-600"
-                >
-                  CEO / Co-Founder
-                </Typography> */}
               </div>
             </div>
-            {/* <div className="w-96">
-              <Tabs value="app">
-                <TabsHeader>
-                  <Tab value="app">
-                    <HomeIcon className="-mt-1 mr-2 inline-block h-5 w-5" />
-                    App
-                  </Tab>
-                  <Tab value="message">
-                    <ChatBubbleLeftEllipsisIcon className="-mt-0.5 mr-2 inline-block h-5 w-5" />
-                    Message
-                  </Tab>
-                  <Tab value="settings">
-                    <Cog6ToothIcon className="-mt-1 mr-2 inline-block h-5 w-5" />
-                    Settings
-                  </Tab>
-                </TabsHeader>
-              </Tabs>
-            </div> */}
           </div>
           <div className="gird-cols-1 mb-12 grid gap-12 px-4 lg:grid-cols-2 xl:grid-cols-3">
             <ProfileInfoCard
               title="Perfil de Usuario"
               description=""
               details={{
-                Nombre: user.name,
-                apellido: user.apellido,
+                Nombre: store.datauser.name,
+                apellido: store.datauser.apellido,
                 email: store.datauser.email,
-                Ubicacion: user.province,
-                // social: (
-                //   <div className="flex items-center gap-4">
-                //     <i className="fa-brands fa-facebook text-blue-700" />
-                //     <i className="fa-brands fa-twitter text-blue-400" />
-                //     <i className="fa-brands fa-instagram text-purple-500" />
-                //   </div>
-                // ),
+                Ubicacion: store.datauser.province,
               }}
               action={
                 <Tooltip content="Edit Profile">
@@ -143,12 +111,6 @@ export function Profile() {
               />
             ))}
 
-            {/* <Typography
-              variant="small"
-              className="font-normal text-blue-gray-500"
-            >
-              Architects design houses
-            </Typography> */}
             <div className="mt-6 grid grid-cols-1 gap-12 md:grid-cols-2 xl:grid-cols-4">
 
             </div>

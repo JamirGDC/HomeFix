@@ -183,32 +183,35 @@ def signup():
 
     return jsonify({"token": access_token, "email": email, "userbe_id": new_user.id}), 201
 
-@api.route('/update_userbe', methods=['PUT'])
-def update_user():
 
+@api.route('/update_userbe', methods=['PUT'])
+def update_userbe():
     data = request.get_json()
+    print("Datos recibidos para actualizar:", data)
 
     userbe_id = data.get("userbe_id")
-
     user = User_be.query.get(userbe_id)
     if not user:
         return jsonify({'message': 'Usuario no encontrado'}), 404
 
-    if 'mangoid' in data:
-        user.mangoid = data.get('mangoid')
-    if 'mangoidwallet' in data:
-        user.mangoidwallet = data.get('mangoidwallet')
-    if 'nombre' in data:
-        user.nombre = data.get('nombre')
-    if 'apellido' in data:
-        user.apellido = data.get('apellido')
-    if 'apellido' in data:
-        user.perfildone = data.get('perfildone')
+    user.mangoid = data.get('mangoid', user.mangoid)
+    user.mangoidwallet = data.get('mangoidwallet', user.mangoidwallet)
+    user.nombre = data.get('first_name', user.nombre)
+    user.apellido = data.get('last_name', user.apellido)
+    user.perfildone = data.get('perfildone', user.perfildone)
 
+    province_name = data.get('province')
+    if province_name:
+        province = Province.query.filter_by(name=province_name).first()
+        if province:
+            user.province_id = province.id
+        else:
+            pass
 
     db.session.commit()
+    
+    return jsonify({'message': 'Perfil actualizado correctamente'}), 200
 
-    return jsonify({'message': 'Usuario actualizado correctamente'}), 200
 
 
 
@@ -248,6 +251,7 @@ def get_user_by_id(userbe_id):
 
         serialized_user = user.serialize()
 
+        print("Devolviendo datos del usuario:", serialized_user)
         return jsonify(serialized_user), 200
 
     except Exception as e:
