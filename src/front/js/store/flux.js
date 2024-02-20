@@ -66,7 +66,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ demo: demo });
 			},
 
-			updateuserbe: async (userbe_id, mangoid, mangoidwallet, first_name, last_name, perfildone) => {
+			updateuserbe: async (userbe_id, mangoid, mangoidwallet, perfildone, first_name, last_name, address_line, city, region, postal_code, country, province, email) => {
 				const store = getStore();
 				try {
 					const response = await fetch(`${process.env.BACKEND_URL}/api/update_userbe`, {
@@ -74,7 +74,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						headers: {
 							'Content-Type': 'application/json'
 						},
-						body: JSON.stringify({ userbe_id, mangoid, mangoidwallet, first_name, last_name, perfildone })
+						body: JSON.stringify({ userbe_id, mangoid, mangoidwallet, perfildone, first_name, last_name, address_line, city, region, postal_code, country, province, email})
 					});
 
 					const data = await response.json();

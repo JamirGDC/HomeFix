@@ -106,7 +106,7 @@ export function Profile() {
                 Nombre: user.name,
                 apellido: user.apellido,
                 email: store.datauser.email,
-                Ubicacion: user.province,
+                Ubicacion: user.provincia,
                 // social: (
                 //   <div className="flex items-center gap-4">
                 //     <i className="fa-brands fa-facebook text-blue-700" />

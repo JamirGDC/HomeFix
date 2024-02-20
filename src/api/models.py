@@ -10,6 +10,7 @@ class User_be(db.Model):
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     province_id = db.Column(db.Integer, db.ForeignKey('province.id'))
     province = db.relationship('Province', backref='users')
+    provincia = db.Column(db.String(120), nullable=True)
     products = db.relationship('Product', backref='seller', lazy=True)
     img = db.Column(db.String(120), nullable=True)
     banner = db.Column(db.String(120), nullable=True)
@@ -32,6 +33,7 @@ class User_be(db.Model):
             "name" : self.nombre,
             "apellido" : self.apellido,
             "province": self.province.name if self.province else None,
+            "provincia": self.provincia,
         }
     
 class Category(db.Model):

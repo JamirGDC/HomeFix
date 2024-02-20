@@ -198,12 +198,14 @@ def update_user():
         user.mangoid = data.get('mangoid')
     if 'mangoidwallet' in data:
         user.mangoidwallet = data.get('mangoidwallet')
-    if 'nombre' in data:
-        user.nombre = data.get('nombre')
-    if 'apellido' in data:
-        user.apellido = data.get('apellido')
-    if 'apellido' in data:
+    if 'first_name' in data:
+        user.nombre = data.get('first_name')
+    if 'last_name' in data:
+        user.apellido = data.get('last_name')
+    if 'perfildone' in data:
         user.perfildone = data.get('perfildone')
+    if 'province' in data:
+        user.provincia = data.get('province')
 
 
     db.session.commit()

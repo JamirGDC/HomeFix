@@ -54,7 +54,7 @@
         "html-loader": "^3.0.1",
         "html-webpack-plugin": "^5.5.0",
         "parse-github-url": "^1.0.2",
-        "postcss": "^8.4.33",
+        "postcss": "^8.4.35",
         "postcss-cli": "^11.0.0",
         "postcss-loader": "^7.3.4",
         "prettier": "^2.5.1",

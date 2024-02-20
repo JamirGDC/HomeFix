@@ -24,6 +24,7 @@ export function CompletePerfil() {
   const [region, setRegion] = useState('');
   const [postal_code, setPostal_code] = useState('');
   const [country, setCountry] = useState('');
+  const [province, setProvince] = useState('');
   const navigate = useNavigate();
   const email = localStorage.getItem('email');
   const mangoid = localStorage.getItem('idmango');
@@ -34,9 +35,7 @@ export function CompletePerfil() {
   const register = async () => {
 
     try {
-      await actions.updateuserbe(first_name, last_name, address_line, city, region, postal_code, country, email);
-
-      await update_userbe();
+      await actions.updateuserbe(userbe_id, mangoid, mangoidwallet, perfildone, first_name, last_name, address_line, city, region, postal_code, country, province, email);
 
       setFirst_Name('');
       setLastName('');
@@ -44,6 +43,7 @@ export function CompletePerfil() {
       setCity('');
       setPostal_code('');
       setCountry('');
+      setProvince('');
       setAddress_Line('');
       navigate("/dashboard/home");
 
@@ -53,9 +53,7 @@ export function CompletePerfil() {
     }
   }
 
-  const update_userbe = async () => {
-    await actions.updateuserbe(userbe_id, mangoid, mangoidwallet, first_name, last_name, perfildone);
-  }
+
 
  
 
@@ -114,8 +112,8 @@ export function CompletePerfil() {
               size="lg"
               type="text"
               label="Provincia"
-              value={region}
-              onChange={e => setRegion(e.target.value)}
+              value={province}
+              onChange={e => setProvince(e.target.value)}
             />
           </div>
           <div className="mb-1 flex flex-col gap-6">
