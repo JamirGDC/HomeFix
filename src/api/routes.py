@@ -409,6 +409,54 @@ def delete_product(product_id):
 
     except Exception as e:
         return jsonify({"message": str(e)}), 500
+
+
+@api.route('/create-categories', methods=['POST'])
+def create_categories_route():
+
+    Category.query.delete()
+
+    category_names = [
+        "Albañileria", "Carpinteria", "Cerrajeria", "Electricidad",
+        "Fontaneria", "Jardineria", "Limpieza", "Manitas",
+        "Mudanzas", "Pintura", "Reformas", "Refrigeracion"
+    ]
+
+    print("Creando categorías")
+    for category_name in category_names:
+        category = Category(name=category_name)
+        db.session.add(category)
+
+    db.session.commit()
+    print("Todas las categorías han sido creadas exitosamente")
+
+    return "Categorías creadas exitosamente", 200
+
+
+@api.route('/create-provinces', methods=['POST'])
+def create_provinces_route():
+    Province.query.delete()
+
+    spanish_provinces = [
+        "Álava", "Albacete", "Alicante", "Almería", "Asturias", "Ávila", "Badajoz", "Barcelona",
+        "Burgos", "Cáceres", "Cádiz", "Cantabria", "Castellón", "Ciudad Real", "Córdoba",
+        "Cuenca", "Gerona", "Granada", "Guadalajara", "Guipúzcoa", "Huelva", "Huesca", "Islas Balears",
+        "Jaén", "La Coruña", "La Rioja", "Las Palmas", "León", "Lérida", "Lugo", "Madrid", "Málaga",
+        "Murcia", "Navarra", "Orense", "Palencia", "Pontevedra", "Salamanca", "Santa Cruz de Tenerife",
+        "Segovia", "Sevilla", "Soria", "Tarragona", "Teruel", "Toledo", "Valencia", "Valladolid", "Vizcaya",
+        "Zamora", "Zaragoza"
+    ]
+
+    print("Creating provinces")
+    for province_name in spanish_provinces:
+        province = Province(name=province_name)
+        db.session.add(province)
+
+    db.session.commit()
+    print("All provinces created")
+
+    return "Provinces created successfully", 200
+
     
 @api.route("/product/<int:productId>", methods=["GET"])
 def get_product_by_id(productId):
@@ -427,4 +475,7 @@ def get_product_by_id(productId):
     except Exception as e:
         return jsonify({"message": str(e)}), 500
         print("Error:", str(e))
+
+
+
     
